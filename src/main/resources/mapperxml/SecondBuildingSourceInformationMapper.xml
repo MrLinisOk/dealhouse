@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangchuang.dealhouse.mapper.SecondBuildingSourceInformationMapper">
+  <resultMap id="BaseResultMap" type="com.hangchuang.dealhouse.pojo.SecondBuildingSourceInformation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="secondbuildingsource_source_type" jdbcType="CHAR" property="secondbuildingsourceSourceType" />
+    <result column="secondbuildingsource_purchase" jdbcType="VARCHAR" property="secondbuildingsourcePurchase" />
+    <result column="secondbuildingsource_unique" jdbcType="CHAR" property="secondbuildingsourceUnique" />
+    <result column="secondbuildingsource_mortgage_information" jdbcType="VARCHAR" property="secondbuildingsourceMortgageInformation" />
+    <result column="telephone_owner" jdbcType="VARCHAR" property="telephoneOwner" />
+    <result column="customer_requirements" jdbcType="CHAR" property="customerRequirements" />
+    <result column="key_information" jdbcType="CHAR" property="keyInformation" />
+    <result column="key_clientr" jdbcType="VARCHAR" property="keyClientr" />
+    <result column="client_telephone_number" jdbcType="VARCHAR" property="clientTelephoneNumber" />
+    <result column="secondbuildingsource_client" jdbcType="VARCHAR" property="secondbuildingsourceClient" />
+    <result column="exclusive_commission" jdbcType="CHAR" property="exclusiveCommission" />
+    <result column="orientation" jdbcType="VARCHAR" property="orientation" />
+    <result column="decoration" jdbcType="VARCHAR" property="decoration" />
+    <result column="house_use" jdbcType="CHAR" property="houseUse" />
+    <result column="ownership_of_the transaction" jdbcType="CHAR" property="ownershipOfTheTransaction" />
+    <result column="secondbuildingsource_elevator" jdbcType="CHAR" property="secondbuildingsourceElevator" />
+    <result column="completion_date" jdbcType="TIMESTAMP" property="completionDate" />
+    <result column="payment_requirements" jdbcType="CHAR" property="paymentRequirements" />
+    <result column="propertiesdetails_list_houseIds" jdbcType="VARCHAR" property="propertiesdetailsListHouseids" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, secondbuildingsource_source_type, secondbuildingsource_purchase, secondbuildingsource_unique, 
+    secondbuildingsource_mortgage_information, telephone_owner, customer_requirements, 
+    key_information, key_clientr, client_telephone_number, secondbuildingsource_client, 
+    exclusive_commission, orientation, decoration, house_use, "ownership_of_the transaction", 
+    secondbuildingsource_elevator, completion_date, payment_requirements, propertiesdetails_list_houseIds
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from secondbuildingsource_information
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from secondbuildingsource_information
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hangchuang.dealhouse.pojo.SecondBuildingSourceInformation">
+    insert into secondbuildingsource_information (id, secondbuildingsource_source_type, 
+      secondbuildingsource_purchase, secondbuildingsource_unique, 
+      secondbuildingsource_mortgage_information, telephone_owner, 
+      customer_requirements, key_information, key_clientr, 
+      client_telephone_number, secondbuildingsource_client, 
+      exclusive_commission, orientation, decoration, 
+      house_use, "ownership_of_the transaction", secondbuildingsource_elevator, 
+      completion_date, payment_requirements, propertiesdetails_list_houseIds
+      )
+    values (#{id,jdbcType=INTEGER}, #{secondbuildingsourceSourceType,jdbcType=CHAR}, 
+      #{secondbuildingsourcePurchase,jdbcType=VARCHAR}, #{secondbuildingsourceUnique,jdbcType=CHAR}, 
+      #{secondbuildingsourceMortgageInformation,jdbcType=VARCHAR}, #{telephoneOwner,jdbcType=VARCHAR}, 
+      #{customerRequirements,jdbcType=CHAR}, #{keyInformation,jdbcType=CHAR}, #{keyClientr,jdbcType=VARCHAR}, 
+      #{clientTelephoneNumber,jdbcType=VARCHAR}, #{secondbuildingsourceClient,jdbcType=VARCHAR}, 
+      #{exclusiveCommission,jdbcType=CHAR}, #{orientation,jdbcType=VARCHAR}, #{decoration,jdbcType=VARCHAR}, 
+      #{houseUse,jdbcType=CHAR}, #{ownershipOfTheTransaction,jdbcType=CHAR}, #{secondbuildingsourceElevator,jdbcType=CHAR}, 
+      #{completionDate,jdbcType=TIMESTAMP}, #{paymentRequirements,jdbcType=CHAR}, #{propertiesdetailsListHouseids,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.SecondBuildingSourceInformation">
+    insert into secondbuildingsource_information
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="secondbuildingsourceSourceType != null">
+        secondbuildingsource_source_type,
+      </if>
+      <if test="secondbuildingsourcePurchase != null">
+        secondbuildingsource_purchase,
+      </if>
+      <if test="secondbuildingsourceUnique != null">
+        secondbuildingsource_unique,
+      </if>
+      <if test="secondbuildingsourceMortgageInformation != null">
+        secondbuildingsource_mortgage_information,
+      </if>
+      <if test="telephoneOwner != null">
+        telephone_owner,
+      </if>
+      <if test="customerRequirements != null">
+        customer_requirements,
+      </if>
+      <if test="keyInformation != null">
+        key_information,
+      </if>
+      <if test="keyClientr != null">
+        key_clientr,
+      </if>
+      <if test="clientTelephoneNumber != null">
+        client_telephone_number,
+      </if>
+      <if test="secondbuildingsourceClient != null">
+        secondbuildingsource_client,
+      </if>
+      <if test="exclusiveCommission != null">
+        exclusive_commission,
+      </if>
+      <if test="orientation != null">
+        orientation,
+      </if>
+      <if test="decoration != null">
+        decoration,
+      </if>
+      <if test="houseUse != null">
+        house_use,
+      </if>
+      <if test="ownershipOfTheTransaction != null">
+        "ownership_of_the transaction",
+      </if>
+      <if test="secondbuildingsourceElevator != null">
+        secondbuildingsource_elevator,
+      </if>
+      <if test="completionDate != null">
+        completion_date,
+      </if>
+      <if test="paymentRequirements != null">
+        payment_requirements,
+      </if>
+      <if test="propertiesdetailsListHouseids != null">
+        propertiesdetails_list_houseIds,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="secondbuildingsourceSourceType != null">
+        #{secondbuildingsourceSourceType,jdbcType=CHAR},
+      </if>
+      <if test="secondbuildingsourcePurchase != null">
+        #{secondbuildingsourcePurchase,jdbcType=VARCHAR},
+      </if>
+      <if test="secondbuildingsourceUnique != null">
+        #{secondbuildingsourceUnique,jdbcType=CHAR},
+      </if>
+      <if test="secondbuildingsourceMortgageInformation != null">
+        #{secondbuildingsourceMortgageInformation,jdbcType=VARCHAR},
+      </if>
+      <if test="telephoneOwner != null">
+        #{telephoneOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="customerRequirements != null">
+        #{customerRequirements,jdbcType=CHAR},
+      </if>
+      <if test="keyInformation != null">
+        #{keyInformation,jdbcType=CHAR},
+      </if>
+      <if test="keyClientr != null">
+        #{keyClientr,jdbcType=VARCHAR},
+      </if>
+      <if test="clientTelephoneNumber != null">
+        #{clientTelephoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="secondbuildingsourceClient != null">
+        #{secondbuildingsourceClient,jdbcType=VARCHAR},
+      </if>
+      <if test="exclusiveCommission != null">
+        #{exclusiveCommission,jdbcType=CHAR},
+      </if>
+      <if test="orientation != null">
+        #{orientation,jdbcType=VARCHAR},
+      </if>
+      <if test="decoration != null">
+        #{decoration,jdbcType=VARCHAR},
+      </if>
+      <if test="houseUse != null">
+        #{houseUse,jdbcType=CHAR},
+      </if>
+      <if test="ownershipOfTheTransaction != null">
+        #{ownershipOfTheTransaction,jdbcType=CHAR},
+      </if>
+      <if test="secondbuildingsourceElevator != null">
+        #{secondbuildingsourceElevator,jdbcType=CHAR},
+      </if>
+      <if test="completionDate != null">
+        #{completionDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymentRequirements != null">
+        #{paymentRequirements,jdbcType=CHAR},
+      </if>
+      <if test="propertiesdetailsListHouseids != null">
+        #{propertiesdetailsListHouseids,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangchuang.dealhouse.pojo.SecondBuildingSourceInformation">
+    update secondbuildingsource_information
+    <set>
+      <if test="secondbuildingsourceSourceType != null">
+        secondbuildingsource_source_type = #{secondbuildingsourceSourceType,jdbcType=CHAR},
+      </if>
+      <if test="secondbuildingsourcePurchase != null">
+        secondbuildingsource_purchase = #{secondbuildingsourcePurchase,jdbcType=VARCHAR},
+      </if>
+      <if test="secondbuildingsourceUnique != null">
+        secondbuildingsource_unique = #{secondbuildingsourceUnique,jdbcType=CHAR},
+      </if>
+      <if test="secondbuildingsourceMortgageInformation != null">
+        secondbuildingsource_mortgage_information = #{secondbuildingsourceMortgageInformation,jdbcType=VARCHAR},
+      </if>
+      <if test="telephoneOwner != null">
+        telephone_owner = #{telephoneOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="customerRequirements != null">
+        customer_requirements = #{customerRequirements,jdbcType=CHAR},
+      </if>
+      <if test="keyInformation != null">
+        key_information = #{keyInformation,jdbcType=CHAR},
+      </if>
+      <if test="keyClientr != null">
+        key_clientr = #{keyClientr,jdbcType=VARCHAR},
+      </if>
+      <if test="clientTelephoneNumber != null">
+        client_telephone_number = #{clientTelephoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="secondbuildingsourceClient != null">
+        secondbuildingsource_client = #{secondbuildingsourceClient,jdbcType=VARCHAR},
+      </if>
+      <if test="exclusiveCommission != null">
+        exclusive_commission = #{exclusiveCommission,jdbcType=CHAR},
+      </if>
+      <if test="orientation != null">
+        orientation = #{orientation,jdbcType=VARCHAR},
+      </if>
+      <if test="decoration != null">
+        decoration = #{decoration,jdbcType=VARCHAR},
+      </if>
+      <if test="houseUse != null">
+        house_use = #{houseUse,jdbcType=CHAR},
+      </if>
+      <if test="ownershipOfTheTransaction != null">
+        "ownership_of_the transaction" = #{ownershipOfTheTransaction,jdbcType=CHAR},
+      </if>
+      <if test="secondbuildingsourceElevator != null">
+        secondbuildingsource_elevator = #{secondbuildingsourceElevator,jdbcType=CHAR},
+      </if>
+      <if test="completionDate != null">
+        completion_date = #{completionDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paymentRequirements != null">
+        payment_requirements = #{paymentRequirements,jdbcType=CHAR},
+      </if>
+      <if test="propertiesdetailsListHouseids != null">
+        propertiesdetails_list_houseIds = #{propertiesdetailsListHouseids,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangchuang.dealhouse.pojo.SecondBuildingSourceInformation">
+    update secondbuildingsource_information
+    set secondbuildingsource_source_type = #{secondbuildingsourceSourceType,jdbcType=CHAR},
+      secondbuildingsource_purchase = #{secondbuildingsourcePurchase,jdbcType=VARCHAR},
+      secondbuildingsource_unique = #{secondbuildingsourceUnique,jdbcType=CHAR},
+      secondbuildingsource_mortgage_information = #{secondbuildingsourceMortgageInformation,jdbcType=VARCHAR},
+      telephone_owner = #{telephoneOwner,jdbcType=VARCHAR},
+      customer_requirements = #{customerRequirements,jdbcType=CHAR},
+      key_information = #{keyInformation,jdbcType=CHAR},
+      key_clientr = #{keyClientr,jdbcType=VARCHAR},
+      client_telephone_number = #{clientTelephoneNumber,jdbcType=VARCHAR},
+      secondbuildingsource_client = #{secondbuildingsourceClient,jdbcType=VARCHAR},
+      exclusive_commission = #{exclusiveCommission,jdbcType=CHAR},
+      orientation = #{orientation,jdbcType=VARCHAR},
+      decoration = #{decoration,jdbcType=VARCHAR},
+      house_use = #{houseUse,jdbcType=CHAR},
+      "ownership_of_the transaction" = #{ownershipOfTheTransaction,jdbcType=CHAR},
+      secondbuildingsource_elevator = #{secondbuildingsourceElevator,jdbcType=CHAR},
+      completion_date = #{completionDate,jdbcType=TIMESTAMP},
+      payment_requirements = #{paymentRequirements,jdbcType=CHAR},
+      propertiesdetails_list_houseIds = #{propertiesdetailsListHouseids,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

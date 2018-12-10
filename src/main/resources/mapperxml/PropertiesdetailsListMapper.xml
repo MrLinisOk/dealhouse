@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangchuang.dealhouse.mapper.PropertiesdetailsListMapper">
+  <resultMap id="BaseResultMap" type="com.hangchuang.dealhouse.pojo.PropertiesdetailsList">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="propertiesdetails_name" jdbcType="VARCHAR" property="propertiesdetailsName" />
+    <result column="developers" jdbcType="VARCHAR" property="developers" />
+    <result column="propertystatus" jdbcType="CHAR" property="propertystatus" />
+    <result column="average_price" jdbcType="DOUBLE" property="averagePrice" />
+    <result column="openingtime" jdbcType="TIMESTAMP" property="openingtime" />
+    <result column="time_of_delivery" jdbcType="TIMESTAMP" property="timeOfDelivery" />
+    <result column="regional_location" jdbcType="VARCHAR" property="regionalLocation" />
+    <result column="real_estate_address" jdbcType="VARCHAR" property="realEstateAddress" />
+    <result column="salesoffice_address" jdbcType="VARCHAR" property="salesofficeAddress" />
+    <result column="architectural_type" jdbcType="VARCHAR" property="architecturalType" />
+    <result column="propertyrights_years" jdbcType="VARCHAR" property="propertyrightsYears" />
+    <result column="area_covered" jdbcType="INTEGER" property="areaCovered" />
+    <result column="built_up_area" jdbcType="INTEGER" property="builtUpArea" />
+    <result column="floor_area_ratio" jdbcType="VARCHAR" property="floorAreaRatio" />
+    <result column="afforestation_rate" jdbcType="VARCHAR" property="afforestationRate" />
+    <result column="planning_households" jdbcType="INTEGER" property="planningHouseholds" />
+    <result column="planning_buildings" jdbcType="INTEGER" property="planningBuildings" />
+    <result column="planning_parking spaces" jdbcType="INTEGER" property="planningParkingSpaces" />
+    <result column="type_of_property" jdbcType="VARCHAR" property="typeOfProperty" />
+    <result column="property_company" jdbcType="VARCHAR" property="propertyCompany" />
+    <result column="property_fee" jdbcType="VARCHAR" property="propertyFee" />
+    <result column="heating_mode" jdbcType="VARCHAR" property="heatingMode" />
+    <result column="water_supply_mode" jdbcType="VARCHAR" property="waterSupplyMode" />
+    <result column="power_supply_mode" jdbcType="VARCHAR" property="powerSupplyMode" />
+    <result column="propertiesdetails_list_houseid" jdbcType="INTEGER" property="propertiesdetailsListHouseid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, propertiesdetails_name, developers, propertystatus, average_price, openingtime, 
+    time_of_delivery, regional_location, real_estate_address, salesoffice_address, architectural_type, 
+    propertyrights_years, area_covered, built_up_area, floor_area_ratio, afforestation_rate, 
+    planning_households, planning_buildings, "planning_parking spaces", type_of_property, 
+    property_company, property_fee, heating_mode, water_supply_mode, power_supply_mode, 
+    propertiesdetails_list_houseid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from propertiesdetails_list
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from propertiesdetails_list
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hangchuang.dealhouse.pojo.PropertiesdetailsList">
+    insert into propertiesdetails_list (id, propertiesdetails_name, developers, 
+      propertystatus, average_price, openingtime, 
+      time_of_delivery, regional_location, real_estate_address, 
+      salesoffice_address, architectural_type, 
+      propertyrights_years, area_covered, built_up_area, 
+      floor_area_ratio, afforestation_rate, planning_households, 
+      planning_buildings, "planning_parking spaces", 
+      type_of_property, property_company, property_fee, 
+      heating_mode, water_supply_mode, power_supply_mode, 
+      propertiesdetails_list_houseid)
+    values (#{id,jdbcType=INTEGER}, #{propertiesdetailsName,jdbcType=VARCHAR}, #{developers,jdbcType=VARCHAR}, 
+      #{propertystatus,jdbcType=CHAR}, #{averagePrice,jdbcType=DOUBLE}, #{openingtime,jdbcType=TIMESTAMP}, 
+      #{timeOfDelivery,jdbcType=TIMESTAMP}, #{regionalLocation,jdbcType=VARCHAR}, #{realEstateAddress,jdbcType=VARCHAR}, 
+      #{salesofficeAddress,jdbcType=VARCHAR}, #{architecturalType,jdbcType=VARCHAR}, 
+      #{propertyrightsYears,jdbcType=VARCHAR}, #{areaCovered,jdbcType=INTEGER}, #{builtUpArea,jdbcType=INTEGER}, 
+      #{floorAreaRatio,jdbcType=VARCHAR}, #{afforestationRate,jdbcType=VARCHAR}, #{planningHouseholds,jdbcType=INTEGER}, 
+      #{planningBuildings,jdbcType=INTEGER}, #{planningParkingSpaces,jdbcType=INTEGER}, 
+      #{typeOfProperty,jdbcType=VARCHAR}, #{propertyCompany,jdbcType=VARCHAR}, #{propertyFee,jdbcType=VARCHAR}, 
+      #{heatingMode,jdbcType=VARCHAR}, #{waterSupplyMode,jdbcType=VARCHAR}, #{powerSupplyMode,jdbcType=VARCHAR}, 
+      #{propertiesdetailsListHouseid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.PropertiesdetailsList">
+    insert into propertiesdetails_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="propertiesdetailsName != null">
+        propertiesdetails_name,
+      </if>
+      <if test="developers != null">
+        developers,
+      </if>
+      <if test="propertystatus != null">
+        propertystatus,
+      </if>
+      <if test="averagePrice != null">
+        average_price,
+      </if>
+      <if test="openingtime != null">
+        openingtime,
+      </if>
+      <if test="timeOfDelivery != null">
+        time_of_delivery,
+      </if>
+      <if test="regionalLocation != null">
+        regional_location,
+      </if>
+      <if test="realEstateAddress != null">
+        real_estate_address,
+      </if>
+      <if test="salesofficeAddress != null">
+        salesoffice_address,
+      </if>
+      <if test="architecturalType != null">
+        architectural_type,
+      </if>
+      <if test="propertyrightsYears != null">
+        propertyrights_years,
+      </if>
+      <if test="areaCovered != null">
+        area_covered,
+      </if>
+      <if test="builtUpArea != null">
+        built_up_area,
+      </if>
+      <if test="floorAreaRatio != null">
+        floor_area_ratio,
+      </if>
+      <if test="afforestationRate != null">
+        afforestation_rate,
+      </if>
+      <if test="planningHouseholds != null">
+        planning_households,
+      </if>
+      <if test="planningBuildings != null">
+        planning_buildings,
+      </if>
+      <if test="planningParkingSpaces != null">
+        "planning_parking spaces",
+      </if>
+      <if test="typeOfProperty != null">
+        type_of_property,
+      </if>
+      <if test="propertyCompany != null">
+        property_company,
+      </if>
+      <if test="propertyFee != null">
+        property_fee,
+      </if>
+      <if test="heatingMode != null">
+        heating_mode,
+      </if>
+      <if test="waterSupplyMode != null">
+        water_supply_mode,
+      </if>
+      <if test="powerSupplyMode != null">
+        power_supply_mode,
+      </if>
+      <if test="propertiesdetailsListHouseid != null">
+        propertiesdetails_list_houseid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="propertiesdetailsName != null">
+        #{propertiesdetailsName,jdbcType=VARCHAR},
+      </if>
+      <if test="developers != null">
+        #{developers,jdbcType=VARCHAR},
+      </if>
+      <if test="propertystatus != null">
+        #{propertystatus,jdbcType=CHAR},
+      </if>
+      <if test="averagePrice != null">
+        #{averagePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="openingtime != null">
+        #{openingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeOfDelivery != null">
+        #{timeOfDelivery,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regionalLocation != null">
+        #{regionalLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="realEstateAddress != null">
+        #{realEstateAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="salesofficeAddress != null">
+        #{salesofficeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="architecturalType != null">
+        #{architecturalType,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyrightsYears != null">
+        #{propertyrightsYears,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCovered != null">
+        #{areaCovered,jdbcType=INTEGER},
+      </if>
+      <if test="builtUpArea != null">
+        #{builtUpArea,jdbcType=INTEGER},
+      </if>
+      <if test="floorAreaRatio != null">
+        #{floorAreaRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="afforestationRate != null">
+        #{afforestationRate,jdbcType=VARCHAR},
+      </if>
+      <if test="planningHouseholds != null">
+        #{planningHouseholds,jdbcType=INTEGER},
+      </if>
+      <if test="planningBuildings != null">
+        #{planningBuildings,jdbcType=INTEGER},
+      </if>
+      <if test="planningParkingSpaces != null">
+        #{planningParkingSpaces,jdbcType=INTEGER},
+      </if>
+      <if test="typeOfProperty != null">
+        #{typeOfProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyCompany != null">
+        #{propertyCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyFee != null">
+        #{propertyFee,jdbcType=VARCHAR},
+      </if>
+      <if test="heatingMode != null">
+        #{heatingMode,jdbcType=VARCHAR},
+      </if>
+      <if test="waterSupplyMode != null">
+        #{waterSupplyMode,jdbcType=VARCHAR},
+      </if>
+      <if test="powerSupplyMode != null">
+        #{powerSupplyMode,jdbcType=VARCHAR},
+      </if>
+      <if test="propertiesdetailsListHouseid != null">
+        #{propertiesdetailsListHouseid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangchuang.dealhouse.pojo.PropertiesdetailsList">
+    update propertiesdetails_list
+    <set>
+      <if test="propertiesdetailsName != null">
+        propertiesdetails_name = #{propertiesdetailsName,jdbcType=VARCHAR},
+      </if>
+      <if test="developers != null">
+        developers = #{developers,jdbcType=VARCHAR},
+      </if>
+      <if test="propertystatus != null">
+        propertystatus = #{propertystatus,jdbcType=CHAR},
+      </if>
+      <if test="averagePrice != null">
+        average_price = #{averagePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="openingtime != null">
+        openingtime = #{openingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeOfDelivery != null">
+        time_of_delivery = #{timeOfDelivery,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regionalLocation != null">
+        regional_location = #{regionalLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="realEstateAddress != null">
+        real_estate_address = #{realEstateAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="salesofficeAddress != null">
+        salesoffice_address = #{salesofficeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="architecturalType != null">
+        architectural_type = #{architecturalType,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyrightsYears != null">
+        propertyrights_years = #{propertyrightsYears,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCovered != null">
+        area_covered = #{areaCovered,jdbcType=INTEGER},
+      </if>
+      <if test="builtUpArea != null">
+        built_up_area = #{builtUpArea,jdbcType=INTEGER},
+      </if>
+      <if test="floorAreaRatio != null">
+        floor_area_ratio = #{floorAreaRatio,jdbcType=VARCHAR},
+      </if>
+      <if test="afforestationRate != null">
+        afforestation_rate = #{afforestationRate,jdbcType=VARCHAR},
+      </if>
+      <if test="planningHouseholds != null">
+        planning_households = #{planningHouseholds,jdbcType=INTEGER},
+      </if>
+      <if test="planningBuildings != null">
+        planning_buildings = #{planningBuildings,jdbcType=INTEGER},
+      </if>
+      <if test="planningParkingSpaces != null">
+        "planning_parking spaces" = #{planningParkingSpaces,jdbcType=INTEGER},
+      </if>
+      <if test="typeOfProperty != null">
+        type_of_property = #{typeOfProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyCompany != null">
+        property_company = #{propertyCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyFee != null">
+        property_fee = #{propertyFee,jdbcType=VARCHAR},
+      </if>
+      <if test="heatingMode != null">
+        heating_mode = #{heatingMode,jdbcType=VARCHAR},
+      </if>
+      <if test="waterSupplyMode != null">
+        water_supply_mode = #{waterSupplyMode,jdbcType=VARCHAR},
+      </if>
+      <if test="powerSupplyMode != null">
+        power_supply_mode = #{powerSupplyMode,jdbcType=VARCHAR},
+      </if>
+      <if test="propertiesdetailsListHouseid != null">
+        propertiesdetails_list_houseid = #{propertiesdetailsListHouseid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangchuang.dealhouse.pojo.PropertiesdetailsList">
+    update propertiesdetails_list
+    set propertiesdetails_name = #{propertiesdetailsName,jdbcType=VARCHAR},
+      developers = #{developers,jdbcType=VARCHAR},
+      propertystatus = #{propertystatus,jdbcType=CHAR},
+      average_price = #{averagePrice,jdbcType=DOUBLE},
+      openingtime = #{openingtime,jdbcType=TIMESTAMP},
+      time_of_delivery = #{timeOfDelivery,jdbcType=TIMESTAMP},
+      regional_location = #{regionalLocation,jdbcType=VARCHAR},
+      real_estate_address = #{realEstateAddress,jdbcType=VARCHAR},
+      salesoffice_address = #{salesofficeAddress,jdbcType=VARCHAR},
+      architectural_type = #{architecturalType,jdbcType=VARCHAR},
+      propertyrights_years = #{propertyrightsYears,jdbcType=VARCHAR},
+      area_covered = #{areaCovered,jdbcType=INTEGER},
+      built_up_area = #{builtUpArea,jdbcType=INTEGER},
+      floor_area_ratio = #{floorAreaRatio,jdbcType=VARCHAR},
+      afforestation_rate = #{afforestationRate,jdbcType=VARCHAR},
+      planning_households = #{planningHouseholds,jdbcType=INTEGER},
+      planning_buildings = #{planningBuildings,jdbcType=INTEGER},
+      "planning_parking spaces" = #{planningParkingSpaces,jdbcType=INTEGER},
+      type_of_property = #{typeOfProperty,jdbcType=VARCHAR},
+      property_company = #{propertyCompany,jdbcType=VARCHAR},
+      property_fee = #{propertyFee,jdbcType=VARCHAR},
+      heating_mode = #{heatingMode,jdbcType=VARCHAR},
+      water_supply_mode = #{waterSupplyMode,jdbcType=VARCHAR},
+      power_supply_mode = #{powerSupplyMode,jdbcType=VARCHAR},
+      propertiesdetails_list_houseid = #{propertiesdetailsListHouseid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

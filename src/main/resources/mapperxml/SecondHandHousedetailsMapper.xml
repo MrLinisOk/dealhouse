@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangchuang.dealhouse.mapper.SecondHandHousedetailsMapper">
+  <resultMap id="BaseResultMap" type="com.hangchuang.dealhouse.pojo.SecondHandHousedetails">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="seconddetails_name" jdbcType="VARCHAR" property="seconddetailsName" />
+    <result column="seconddetails_rotation_picture" jdbcType="VARCHAR" property="seconddetailsRotationPicture" />
+    <result column="seconddetails_address" jdbcType="VARCHAR" property="seconddetailsAddress" />
+    <result column="seconddetails_selling_price" jdbcType="DOUBLE" property="seconddetailsSellingPrice" />
+    <result column="seconddetails_huxing" jdbcType="INTEGER" property="seconddetailsHuxing" />
+    <result column="seconddetails_area" jdbcType="INTEGER" property="seconddetailsArea" />
+    <result column="seconddetails_average_price" jdbcType="DOUBLE" property="seconddetailsAveragePrice" />
+    <result column="seconddetails_floor" jdbcType="VARCHAR" property="seconddetailsFloor" />
+    <result column="seconddetails_orientation" jdbcType="CHAR" property="seconddetailsOrientation" />
+    <result column="seconddetails_age" jdbcType="VARCHAR" property="seconddetailsAge" />
+    <result column="seconddetails_plate_type" jdbcType="VARCHAR" property="seconddetailsPlateType" />
+    <result column="seconddetails_listing_time" jdbcType="DATE" property="seconddetailsListingTime" />
+    <result column="seconddetails_renovation" jdbcType="CHAR" property="seconddetailsRenovation" />
+    <result column="seconddetails_ownership" jdbcType="VARCHAR" property="seconddetailsOwnership" />
+    <result column="seconddetails_purpose" jdbcType="VARCHAR" property="seconddetailsPurpose" />
+    <result column="seconddetails_elevator" jdbcType="CHAR" property="seconddetailsElevator" />
+    <result column="introduction_id" jdbcType="INTEGER" property="introductionId" />
+    <result column="rentingdetails_indoor_id" jdbcType="INTEGER" property="rentingdetailsIndoorId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, seconddetails_name, seconddetails_rotation_picture, seconddetails_address, seconddetails_selling_price, 
+    seconddetails_huxing, seconddetails_area, seconddetails_average_price, seconddetails_floor, 
+    seconddetails_orientation, seconddetails_age, seconddetails_plate_type, seconddetails_listing_time, 
+    seconddetails_renovation, seconddetails_ownership, seconddetails_purpose, seconddetails_elevator, 
+    introduction_id, rentingdetails_indoor_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from second_hand_housedetails
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from second_hand_housedetails
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hangchuang.dealhouse.pojo.SecondHandHousedetails">
+    insert into second_hand_housedetails (id, seconddetails_name, seconddetails_rotation_picture, 
+      seconddetails_address, seconddetails_selling_price, 
+      seconddetails_huxing, seconddetails_area, 
+      seconddetails_average_price, seconddetails_floor, 
+      seconddetails_orientation, seconddetails_age, 
+      seconddetails_plate_type, seconddetails_listing_time, 
+      seconddetails_renovation, seconddetails_ownership, 
+      seconddetails_purpose, seconddetails_elevator, 
+      introduction_id, rentingdetails_indoor_id)
+    values (#{id,jdbcType=INTEGER}, #{seconddetailsName,jdbcType=VARCHAR}, #{seconddetailsRotationPicture,jdbcType=VARCHAR}, 
+      #{seconddetailsAddress,jdbcType=VARCHAR}, #{seconddetailsSellingPrice,jdbcType=DOUBLE}, 
+      #{seconddetailsHuxing,jdbcType=INTEGER}, #{seconddetailsArea,jdbcType=INTEGER}, 
+      #{seconddetailsAveragePrice,jdbcType=DOUBLE}, #{seconddetailsFloor,jdbcType=VARCHAR}, 
+      #{seconddetailsOrientation,jdbcType=CHAR}, #{seconddetailsAge,jdbcType=VARCHAR}, 
+      #{seconddetailsPlateType,jdbcType=VARCHAR}, #{seconddetailsListingTime,jdbcType=DATE}, 
+      #{seconddetailsRenovation,jdbcType=CHAR}, #{seconddetailsOwnership,jdbcType=VARCHAR}, 
+      #{seconddetailsPurpose,jdbcType=VARCHAR}, #{seconddetailsElevator,jdbcType=CHAR}, 
+      #{introductionId,jdbcType=INTEGER}, #{rentingdetailsIndoorId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.SecondHandHousedetails">
+    insert into second_hand_housedetails
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="seconddetailsName != null">
+        seconddetails_name,
+      </if>
+      <if test="seconddetailsRotationPicture != null">
+        seconddetails_rotation_picture,
+      </if>
+      <if test="seconddetailsAddress != null">
+        seconddetails_address,
+      </if>
+      <if test="seconddetailsSellingPrice != null">
+        seconddetails_selling_price,
+      </if>
+      <if test="seconddetailsHuxing != null">
+        seconddetails_huxing,
+      </if>
+      <if test="seconddetailsArea != null">
+        seconddetails_area,
+      </if>
+      <if test="seconddetailsAveragePrice != null">
+        seconddetails_average_price,
+      </if>
+      <if test="seconddetailsFloor != null">
+        seconddetails_floor,
+      </if>
+      <if test="seconddetailsOrientation != null">
+        seconddetails_orientation,
+      </if>
+      <if test="seconddetailsAge != null">
+        seconddetails_age,
+      </if>
+      <if test="seconddetailsPlateType != null">
+        seconddetails_plate_type,
+      </if>
+      <if test="seconddetailsListingTime != null">
+        seconddetails_listing_time,
+      </if>
+      <if test="seconddetailsRenovation != null">
+        seconddetails_renovation,
+      </if>
+      <if test="seconddetailsOwnership != null">
+        seconddetails_ownership,
+      </if>
+      <if test="seconddetailsPurpose != null">
+        seconddetails_purpose,
+      </if>
+      <if test="seconddetailsElevator != null">
+        seconddetails_elevator,
+      </if>
+      <if test="introductionId != null">
+        introduction_id,
+      </if>
+      <if test="rentingdetailsIndoorId != null">
+        rentingdetails_indoor_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="seconddetailsName != null">
+        #{seconddetailsName,jdbcType=VARCHAR},
+      </if>
+      <if test="seconddetailsRotationPicture != null">
+        #{seconddetailsRotationPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="seconddetailsAddress != null">
+        #{seconddetailsAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="seconddetailsSellingPrice != null">
+        #{seconddetailsSellingPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="seconddetailsHuxing != null">
+        #{seconddetailsHuxing,jdbcType=INTEGER},
+      </if>
+      <if test="seconddetailsArea != null">
+        #{seconddetailsArea,jdbcType=INTEGER},
+      </if>
+      <if test="seconddetailsAveragePrice != null">
+        #{seconddetailsAveragePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="seconddetailsFloor != null">
+        #{seconddetailsFloor,jdbcType=VARCHAR},
+      </if>
+      <if test="seconddetailsOrientation != null">
+        #{seconddetailsOrientation,jdbcType=CHAR},
+      </if>
+      <if test="seconddetailsAge != null">
+        #{seconddetailsAge,jdbcType=VARCHAR},
+      </if>
+      <if test="seconddetailsPlateType != null">
+        #{seconddetailsPlateType,jdbcType=VARCHAR},
+      </if>
+      <if test="seconddetailsListingTime != null">
+        #{seconddetailsListingTime,jdbcType=DATE},
+      </if>
+      <if test="seconddetailsRenovation != null">
+        #{seconddetailsRenovation,jdbcType=CHAR},
+      </if>
+      <if test="seconddetailsOwnership != null">
+        #{seconddetailsOwnership,jdbcType=VARCHAR},
+      </if>
+      <if test="seconddetailsPurpose != null">
+        #{seconddetailsPurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="seconddetailsElevator != null">
+        #{seconddetailsElevator,jdbcType=CHAR},
+      </if>
+      <if test="introductionId != null">
+        #{introductionId,jdbcType=INTEGER},
+      </if>
+      <if test="rentingdetailsIndoorId != null">
+        #{rentingdetailsIndoorId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangchuang.dealhouse.pojo.SecondHandHousedetails">
+    update second_hand_housedetails
+    <set>
+      <if test="seconddetailsName != null">
+        seconddetails_name = #{seconddetailsName,jdbcType=VARCHAR},
+      </if>
+      <if test="seconddetailsRotationPicture != null">
+        seconddetails_rotation_picture = #{seconddetailsRotationPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="seconddetailsAddress != null">
+        seconddetails_address = #{seconddetailsAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="seconddetailsSellingPrice != null">
+        seconddetails_selling_price = #{seconddetailsSellingPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="seconddetailsHuxing != null">
+        seconddetails_huxing = #{seconddetailsHuxing,jdbcType=INTEGER},
+      </if>
+      <if test="seconddetailsArea != null">
+        seconddetails_area = #{seconddetailsArea,jdbcType=INTEGER},
+      </if>
+      <if test="seconddetailsAveragePrice != null">
+        seconddetails_average_price = #{seconddetailsAveragePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="seconddetailsFloor != null">
+        seconddetails_floor = #{seconddetailsFloor,jdbcType=VARCHAR},
+      </if>
+      <if test="seconddetailsOrientation != null">
+        seconddetails_orientation = #{seconddetailsOrientation,jdbcType=CHAR},
+      </if>
+      <if test="seconddetailsAge != null">
+        seconddetails_age = #{seconddetailsAge,jdbcType=VARCHAR},
+      </if>
+      <if test="seconddetailsPlateType != null">
+        seconddetails_plate_type = #{seconddetailsPlateType,jdbcType=VARCHAR},
+      </if>
+      <if test="seconddetailsListingTime != null">
+        seconddetails_listing_time = #{seconddetailsListingTime,jdbcType=DATE},
+      </if>
+      <if test="seconddetailsRenovation != null">
+        seconddetails_renovation = #{seconddetailsRenovation,jdbcType=CHAR},
+      </if>
+      <if test="seconddetailsOwnership != null">
+        seconddetails_ownership = #{seconddetailsOwnership,jdbcType=VARCHAR},
+      </if>
+      <if test="seconddetailsPurpose != null">
+        seconddetails_purpose = #{seconddetailsPurpose,jdbcType=VARCHAR},
+      </if>
+      <if test="seconddetailsElevator != null">
+        seconddetails_elevator = #{seconddetailsElevator,jdbcType=CHAR},
+      </if>
+      <if test="introductionId != null">
+        introduction_id = #{introductionId,jdbcType=INTEGER},
+      </if>
+      <if test="rentingdetailsIndoorId != null">
+        rentingdetails_indoor_id = #{rentingdetailsIndoorId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangchuang.dealhouse.pojo.SecondHandHousedetails">
+    update second_hand_housedetails
+    set seconddetails_name = #{seconddetailsName,jdbcType=VARCHAR},
+      seconddetails_rotation_picture = #{seconddetailsRotationPicture,jdbcType=VARCHAR},
+      seconddetails_address = #{seconddetailsAddress,jdbcType=VARCHAR},
+      seconddetails_selling_price = #{seconddetailsSellingPrice,jdbcType=DOUBLE},
+      seconddetails_huxing = #{seconddetailsHuxing,jdbcType=INTEGER},
+      seconddetails_area = #{seconddetailsArea,jdbcType=INTEGER},
+      seconddetails_average_price = #{seconddetailsAveragePrice,jdbcType=DOUBLE},
+      seconddetails_floor = #{seconddetailsFloor,jdbcType=VARCHAR},
+      seconddetails_orientation = #{seconddetailsOrientation,jdbcType=CHAR},
+      seconddetails_age = #{seconddetailsAge,jdbcType=VARCHAR},
+      seconddetails_plate_type = #{seconddetailsPlateType,jdbcType=VARCHAR},
+      seconddetails_listing_time = #{seconddetailsListingTime,jdbcType=DATE},
+      seconddetails_renovation = #{seconddetailsRenovation,jdbcType=CHAR},
+      seconddetails_ownership = #{seconddetailsOwnership,jdbcType=VARCHAR},
+      seconddetails_purpose = #{seconddetailsPurpose,jdbcType=VARCHAR},
+      seconddetails_elevator = #{seconddetailsElevator,jdbcType=CHAR},
+      introduction_id = #{introductionId,jdbcType=INTEGER},
+      rentingdetails_indoor_id = #{rentingdetailsIndoorId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

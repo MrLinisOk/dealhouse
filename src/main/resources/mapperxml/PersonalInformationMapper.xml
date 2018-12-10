@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangchuang.dealhouse.mapper.PersonalInformationMapper">
+  <resultMap id="BaseResultMap" type="com.hangchuang.dealhouse.pojo.PersonalInformation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="personal_informationfull_name" jdbcType="VARCHAR" property="personalInformationfullName" />
+    <result column="personal_information_position" jdbcType="VARCHAR" property="personalInformationPosition" />
+    <result column="personal_information_job_number" jdbcType="VARCHAR" property="personalInformationJobNumber" />
+    <result column="personal_information_department" jdbcType="VARCHAR" property="personalInformationDepartment" />
+    <result column="personal_information_region" jdbcType="VARCHAR" property="personalInformationRegion" />
+    <result column="personal_information_group" jdbcType="VARCHAR" property="personalInformationGroup" />
+    <result column="personal_information_telephone" jdbcType="VARCHAR" property="personalInformationTelephone" />
+    <result column="personal_information_wechat" jdbcType="VARCHAR" property="personalInformationWechat" />
+    <result column="personal_information_mailbox" jdbcType="VARCHAR" property="personalInformationMailbox" />
+    <result column="personal_information_headimage" jdbcType="VARCHAR" property="personalInformationHeadimage" />
+    <result column="personal_information_entry_time" jdbcType="DATE" property="personalInformationEntryTime" />
+    <result column="idcardno" jdbcType="VARCHAR" property="idcardno" />
+    <result column="home_address" jdbcType="VARCHAR" property="homeAddress" />
+    <result column="propertiesinformation_houseids" jdbcType="INTEGER" property="propertiesinformationHouseids" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hangchuang.dealhouse.pojo.PersonalInformation">
+    <result column="honored" jdbcType="LONGVARCHAR" property="honored" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, personal_informationfull_name, personal_information_position, personal_information_job_number, 
+    personal_information_department, personal_information_region, personal_information_group, 
+    personal_information_telephone, personal_information_wechat, personal_information_mailbox, 
+    personal_information_headimage, personal_information_entry_time, idcardno, home_address, 
+    propertiesinformation_houseids
+  </sql>
+  <sql id="Blob_Column_List">
+    honored
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from personal_information
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from personal_information
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hangchuang.dealhouse.pojo.PersonalInformation">
+    insert into personal_information (id, personal_informationfull_name, 
+      personal_information_position, personal_information_job_number, 
+      personal_information_department, personal_information_region, 
+      personal_information_group, personal_information_telephone, 
+      personal_information_wechat, personal_information_mailbox, 
+      personal_information_headimage, personal_information_entry_time, 
+      idcardno, home_address, propertiesinformation_houseids, 
+      honored)
+    values (#{id,jdbcType=INTEGER}, #{personalInformationfullName,jdbcType=VARCHAR}, 
+      #{personalInformationPosition,jdbcType=VARCHAR}, #{personalInformationJobNumber,jdbcType=VARCHAR}, 
+      #{personalInformationDepartment,jdbcType=VARCHAR}, #{personalInformationRegion,jdbcType=VARCHAR}, 
+      #{personalInformationGroup,jdbcType=VARCHAR}, #{personalInformationTelephone,jdbcType=VARCHAR}, 
+      #{personalInformationWechat,jdbcType=VARCHAR}, #{personalInformationMailbox,jdbcType=VARCHAR}, 
+      #{personalInformationHeadimage,jdbcType=VARCHAR}, #{personalInformationEntryTime,jdbcType=DATE}, 
+      #{idcardno,jdbcType=VARCHAR}, #{homeAddress,jdbcType=VARCHAR}, #{propertiesinformationHouseids,jdbcType=INTEGER}, 
+      #{honored,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.PersonalInformation">
+    insert into personal_information
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="personalInformationfullName != null">
+        personal_informationfull_name,
+      </if>
+      <if test="personalInformationPosition != null">
+        personal_information_position,
+      </if>
+      <if test="personalInformationJobNumber != null">
+        personal_information_job_number,
+      </if>
+      <if test="personalInformationDepartment != null">
+        personal_information_department,
+      </if>
+      <if test="personalInformationRegion != null">
+        personal_information_region,
+      </if>
+      <if test="personalInformationGroup != null">
+        personal_information_group,
+      </if>
+      <if test="personalInformationTelephone != null">
+        personal_information_telephone,
+      </if>
+      <if test="personalInformationWechat != null">
+        personal_information_wechat,
+      </if>
+      <if test="personalInformationMailbox != null">
+        personal_information_mailbox,
+      </if>
+      <if test="personalInformationHeadimage != null">
+        personal_information_headimage,
+      </if>
+      <if test="personalInformationEntryTime != null">
+        personal_information_entry_time,
+      </if>
+      <if test="idcardno != null">
+        idcardno,
+      </if>
+      <if test="homeAddress != null">
+        home_address,
+      </if>
+      <if test="propertiesinformationHouseids != null">
+        propertiesinformation_houseids,
+      </if>
+      <if test="honored != null">
+        honored,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="personalInformationfullName != null">
+        #{personalInformationfullName,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationPosition != null">
+        #{personalInformationPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationJobNumber != null">
+        #{personalInformationJobNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationDepartment != null">
+        #{personalInformationDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationRegion != null">
+        #{personalInformationRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationGroup != null">
+        #{personalInformationGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationTelephone != null">
+        #{personalInformationTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationWechat != null">
+        #{personalInformationWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationMailbox != null">
+        #{personalInformationMailbox,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationHeadimage != null">
+        #{personalInformationHeadimage,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationEntryTime != null">
+        #{personalInformationEntryTime,jdbcType=DATE},
+      </if>
+      <if test="idcardno != null">
+        #{idcardno,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddress != null">
+        #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="propertiesinformationHouseids != null">
+        #{propertiesinformationHouseids,jdbcType=INTEGER},
+      </if>
+      <if test="honored != null">
+        #{honored,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangchuang.dealhouse.pojo.PersonalInformation">
+    update personal_information
+    <set>
+      <if test="personalInformationfullName != null">
+        personal_informationfull_name = #{personalInformationfullName,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationPosition != null">
+        personal_information_position = #{personalInformationPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationJobNumber != null">
+        personal_information_job_number = #{personalInformationJobNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationDepartment != null">
+        personal_information_department = #{personalInformationDepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationRegion != null">
+        personal_information_region = #{personalInformationRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationGroup != null">
+        personal_information_group = #{personalInformationGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationTelephone != null">
+        personal_information_telephone = #{personalInformationTelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationWechat != null">
+        personal_information_wechat = #{personalInformationWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationMailbox != null">
+        personal_information_mailbox = #{personalInformationMailbox,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationHeadimage != null">
+        personal_information_headimage = #{personalInformationHeadimage,jdbcType=VARCHAR},
+      </if>
+      <if test="personalInformationEntryTime != null">
+        personal_information_entry_time = #{personalInformationEntryTime,jdbcType=DATE},
+      </if>
+      <if test="idcardno != null">
+        idcardno = #{idcardno,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddress != null">
+        home_address = #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="propertiesinformationHouseids != null">
+        propertiesinformation_houseids = #{propertiesinformationHouseids,jdbcType=INTEGER},
+      </if>
+      <if test="honored != null">
+        honored = #{honored,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hangchuang.dealhouse.pojo.PersonalInformation">
+    update personal_information
+    set personal_informationfull_name = #{personalInformationfullName,jdbcType=VARCHAR},
+      personal_information_position = #{personalInformationPosition,jdbcType=VARCHAR},
+      personal_information_job_number = #{personalInformationJobNumber,jdbcType=VARCHAR},
+      personal_information_department = #{personalInformationDepartment,jdbcType=VARCHAR},
+      personal_information_region = #{personalInformationRegion,jdbcType=VARCHAR},
+      personal_information_group = #{personalInformationGroup,jdbcType=VARCHAR},
+      personal_information_telephone = #{personalInformationTelephone,jdbcType=VARCHAR},
+      personal_information_wechat = #{personalInformationWechat,jdbcType=VARCHAR},
+      personal_information_mailbox = #{personalInformationMailbox,jdbcType=VARCHAR},
+      personal_information_headimage = #{personalInformationHeadimage,jdbcType=VARCHAR},
+      personal_information_entry_time = #{personalInformationEntryTime,jdbcType=DATE},
+      idcardno = #{idcardno,jdbcType=VARCHAR},
+      home_address = #{homeAddress,jdbcType=VARCHAR},
+      propertiesinformation_houseids = #{propertiesinformationHouseids,jdbcType=INTEGER},
+      honored = #{honored,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangchuang.dealhouse.pojo.PersonalInformation">
+    update personal_information
+    set personal_informationfull_name = #{personalInformationfullName,jdbcType=VARCHAR},
+      personal_information_position = #{personalInformationPosition,jdbcType=VARCHAR},
+      personal_information_job_number = #{personalInformationJobNumber,jdbcType=VARCHAR},
+      personal_information_department = #{personalInformationDepartment,jdbcType=VARCHAR},
+      personal_information_region = #{personalInformationRegion,jdbcType=VARCHAR},
+      personal_information_group = #{personalInformationGroup,jdbcType=VARCHAR},
+      personal_information_telephone = #{personalInformationTelephone,jdbcType=VARCHAR},
+      personal_information_wechat = #{personalInformationWechat,jdbcType=VARCHAR},
+      personal_information_mailbox = #{personalInformationMailbox,jdbcType=VARCHAR},
+      personal_information_headimage = #{personalInformationHeadimage,jdbcType=VARCHAR},
+      personal_information_entry_time = #{personalInformationEntryTime,jdbcType=DATE},
+      idcardno = #{idcardno,jdbcType=VARCHAR},
+      home_address = #{homeAddress,jdbcType=VARCHAR},
+      propertiesinformation_houseids = #{propertiesinformationHouseids,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

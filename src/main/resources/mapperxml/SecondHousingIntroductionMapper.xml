@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangchuang.dealhouse.mapper.SecondHousingIntroductionMapper">
+  <resultMap id="BaseResultMap" type="com.hangchuang.dealhouse.pojo.SecondHousingIntroduction">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="house_type" jdbcType="VARCHAR" property="houseType" />
+    <result column="community_introduction" jdbcType="VARCHAR" property="communityIntroduction" />
+    <result column="sale_details" jdbcType="VARCHAR" property="saleDetails" />
+    <result column="core_selling_point" jdbcType="VARCHAR" property="coreSellingPoint" />
+    <result column="housing_source_characteristics" jdbcType="VARCHAR" property="housingSourceCharacteristics" />
+    <result column="list_houseid" jdbcType="INTEGER" property="listHouseid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, house_type, community_introduction, sale_details, core_selling_point, housing_source_characteristics, 
+    list_houseid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from second_housing_introduction
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from second_housing_introduction
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hangchuang.dealhouse.pojo.SecondHousingIntroduction">
+    insert into second_housing_introduction (id, house_type, community_introduction, 
+      sale_details, core_selling_point, housing_source_characteristics, 
+      list_houseid)
+    values (#{id,jdbcType=INTEGER}, #{houseType,jdbcType=VARCHAR}, #{communityIntroduction,jdbcType=VARCHAR}, 
+      #{saleDetails,jdbcType=VARCHAR}, #{coreSellingPoint,jdbcType=VARCHAR}, #{housingSourceCharacteristics,jdbcType=VARCHAR}, 
+      #{listHouseid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.SecondHousingIntroduction">
+    insert into second_housing_introduction
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="houseType != null">
+        house_type,
+      </if>
+      <if test="communityIntroduction != null">
+        community_introduction,
+      </if>
+      <if test="saleDetails != null">
+        sale_details,
+      </if>
+      <if test="coreSellingPoint != null">
+        core_selling_point,
+      </if>
+      <if test="housingSourceCharacteristics != null">
+        housing_source_characteristics,
+      </if>
+      <if test="listHouseid != null">
+        list_houseid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="houseType != null">
+        #{houseType,jdbcType=VARCHAR},
+      </if>
+      <if test="communityIntroduction != null">
+        #{communityIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="saleDetails != null">
+        #{saleDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="coreSellingPoint != null">
+        #{coreSellingPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="housingSourceCharacteristics != null">
+        #{housingSourceCharacteristics,jdbcType=VARCHAR},
+      </if>
+      <if test="listHouseid != null">
+        #{listHouseid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangchuang.dealhouse.pojo.SecondHousingIntroduction">
+    update second_housing_introduction
+    <set>
+      <if test="houseType != null">
+        house_type = #{houseType,jdbcType=VARCHAR},
+      </if>
+      <if test="communityIntroduction != null">
+        community_introduction = #{communityIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="saleDetails != null">
+        sale_details = #{saleDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="coreSellingPoint != null">
+        core_selling_point = #{coreSellingPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="housingSourceCharacteristics != null">
+        housing_source_characteristics = #{housingSourceCharacteristics,jdbcType=VARCHAR},
+      </if>
+      <if test="listHouseid != null">
+        list_houseid = #{listHouseid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangchuang.dealhouse.pojo.SecondHousingIntroduction">
+    update second_housing_introduction
+    set house_type = #{houseType,jdbcType=VARCHAR},
+      community_introduction = #{communityIntroduction,jdbcType=VARCHAR},
+      sale_details = #{saleDetails,jdbcType=VARCHAR},
+      core_selling_point = #{coreSellingPoint,jdbcType=VARCHAR},
+      housing_source_characteristics = #{housingSourceCharacteristics,jdbcType=VARCHAR},
+      list_houseid = #{listHouseid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

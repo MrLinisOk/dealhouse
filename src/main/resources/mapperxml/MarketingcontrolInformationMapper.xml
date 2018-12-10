@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangchuang.dealhouse.mapper.MarketingcontrolInformationMapper">
+  <resultMap id="BaseResultMap" type="com.hangchuang.dealhouse.pojo.MarketingcontrolInformation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="marketingcontrol_title" jdbcType="VARCHAR" property="marketingcontrolTitle" />
+    <result column="marketingcontrol_time" jdbcType="TIMESTAMP" property="marketingcontrolTime" />
+    <result column="marketingcontrol_content" jdbcType="VARCHAR" property="marketingcontrolContent" />
+    <result column="marketingcontrol_picture" jdbcType="VARCHAR" property="marketingcontrolPicture" />
+    <result column="marketingcontrol_houseid" jdbcType="INTEGER" property="marketingcontrolHouseid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, marketingcontrol_title, marketingcontrol_time, marketingcontrol_content, marketingcontrol_picture, 
+    marketingcontrol_houseid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from marketingcontrol_information
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from marketingcontrol_information
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hangchuang.dealhouse.pojo.MarketingcontrolInformation">
+    insert into marketingcontrol_information (id, marketingcontrol_title, marketingcontrol_time, 
+      marketingcontrol_content, marketingcontrol_picture, 
+      marketingcontrol_houseid)
+    values (#{id,jdbcType=INTEGER}, #{marketingcontrolTitle,jdbcType=VARCHAR}, #{marketingcontrolTime,jdbcType=TIMESTAMP}, 
+      #{marketingcontrolContent,jdbcType=VARCHAR}, #{marketingcontrolPicture,jdbcType=VARCHAR}, 
+      #{marketingcontrolHouseid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.MarketingcontrolInformation">
+    insert into marketingcontrol_information
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="marketingcontrolTitle != null">
+        marketingcontrol_title,
+      </if>
+      <if test="marketingcontrolTime != null">
+        marketingcontrol_time,
+      </if>
+      <if test="marketingcontrolContent != null">
+        marketingcontrol_content,
+      </if>
+      <if test="marketingcontrolPicture != null">
+        marketingcontrol_picture,
+      </if>
+      <if test="marketingcontrolHouseid != null">
+        marketingcontrol_houseid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="marketingcontrolTitle != null">
+        #{marketingcontrolTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="marketingcontrolTime != null">
+        #{marketingcontrolTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="marketingcontrolContent != null">
+        #{marketingcontrolContent,jdbcType=VARCHAR},
+      </if>
+      <if test="marketingcontrolPicture != null">
+        #{marketingcontrolPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="marketingcontrolHouseid != null">
+        #{marketingcontrolHouseid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangchuang.dealhouse.pojo.MarketingcontrolInformation">
+    update marketingcontrol_information
+    <set>
+      <if test="marketingcontrolTitle != null">
+        marketingcontrol_title = #{marketingcontrolTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="marketingcontrolTime != null">
+        marketingcontrol_time = #{marketingcontrolTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="marketingcontrolContent != null">
+        marketingcontrol_content = #{marketingcontrolContent,jdbcType=VARCHAR},
+      </if>
+      <if test="marketingcontrolPicture != null">
+        marketingcontrol_picture = #{marketingcontrolPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="marketingcontrolHouseid != null">
+        marketingcontrol_houseid = #{marketingcontrolHouseid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangchuang.dealhouse.pojo.MarketingcontrolInformation">
+    update marketingcontrol_information
+    set marketingcontrol_title = #{marketingcontrolTitle,jdbcType=VARCHAR},
+      marketingcontrol_time = #{marketingcontrolTime,jdbcType=TIMESTAMP},
+      marketingcontrol_content = #{marketingcontrolContent,jdbcType=VARCHAR},
+      marketingcontrol_picture = #{marketingcontrolPicture,jdbcType=VARCHAR},
+      marketingcontrol_houseid = #{marketingcontrolHouseid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

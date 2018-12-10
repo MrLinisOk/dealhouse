@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangchuang.dealhouse.mapper.PraiseMapper">
+  <resultMap id="BaseResultMap" type="com.hangchuang.dealhouse.pojo.Praise">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="praise_commentator" jdbcType="VARCHAR" property="praiseCommentator" />
+    <result column="praise_commentator_image" jdbcType="VARCHAR" property="praiseCommentatorImage" />
+    <result column="praise_comment_content" jdbcType="VARCHAR" property="praiseCommentContent" />
+    <result column="praise_comment_picture" jdbcType="VARCHAR" property="praiseCommentPicture" />
+    <result column="praise_comment_time" jdbcType="TIMESTAMP" property="praiseCommentTime" />
+    <result column="praise_praise" jdbcType="VARCHAR" property="praisePraise" />
+    <result column="praise_houseid" jdbcType="INTEGER" property="praiseHouseid" />
+    <result column="praise_father_id" jdbcType="INTEGER" property="praiseFatherId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, praise_commentator, praise_commentator_image, praise_comment_content, praise_comment_picture, 
+    praise_comment_time, praise_praise, praise_houseid, praise_father_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from praise
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from praise
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hangchuang.dealhouse.pojo.Praise">
+    insert into praise (id, praise_commentator, praise_commentator_image, 
+      praise_comment_content, praise_comment_picture, 
+      praise_comment_time, praise_praise, praise_houseid, 
+      praise_father_id)
+    values (#{id,jdbcType=INTEGER}, #{praiseCommentator,jdbcType=VARCHAR}, #{praiseCommentatorImage,jdbcType=VARCHAR}, 
+      #{praiseCommentContent,jdbcType=VARCHAR}, #{praiseCommentPicture,jdbcType=VARCHAR}, 
+      #{praiseCommentTime,jdbcType=TIMESTAMP}, #{praisePraise,jdbcType=VARCHAR}, #{praiseHouseid,jdbcType=INTEGER}, 
+      #{praiseFatherId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.Praise">
+    insert into praise
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="praiseCommentator != null">
+        praise_commentator,
+      </if>
+      <if test="praiseCommentatorImage != null">
+        praise_commentator_image,
+      </if>
+      <if test="praiseCommentContent != null">
+        praise_comment_content,
+      </if>
+      <if test="praiseCommentPicture != null">
+        praise_comment_picture,
+      </if>
+      <if test="praiseCommentTime != null">
+        praise_comment_time,
+      </if>
+      <if test="praisePraise != null">
+        praise_praise,
+      </if>
+      <if test="praiseHouseid != null">
+        praise_houseid,
+      </if>
+      <if test="praiseFatherId != null">
+        praise_father_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="praiseCommentator != null">
+        #{praiseCommentator,jdbcType=VARCHAR},
+      </if>
+      <if test="praiseCommentatorImage != null">
+        #{praiseCommentatorImage,jdbcType=VARCHAR},
+      </if>
+      <if test="praiseCommentContent != null">
+        #{praiseCommentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="praiseCommentPicture != null">
+        #{praiseCommentPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="praiseCommentTime != null">
+        #{praiseCommentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="praisePraise != null">
+        #{praisePraise,jdbcType=VARCHAR},
+      </if>
+      <if test="praiseHouseid != null">
+        #{praiseHouseid,jdbcType=INTEGER},
+      </if>
+      <if test="praiseFatherId != null">
+        #{praiseFatherId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangchuang.dealhouse.pojo.Praise">
+    update praise
+    <set>
+      <if test="praiseCommentator != null">
+        praise_commentator = #{praiseCommentator,jdbcType=VARCHAR},
+      </if>
+      <if test="praiseCommentatorImage != null">
+        praise_commentator_image = #{praiseCommentatorImage,jdbcType=VARCHAR},
+      </if>
+      <if test="praiseCommentContent != null">
+        praise_comment_content = #{praiseCommentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="praiseCommentPicture != null">
+        praise_comment_picture = #{praiseCommentPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="praiseCommentTime != null">
+        praise_comment_time = #{praiseCommentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="praisePraise != null">
+        praise_praise = #{praisePraise,jdbcType=VARCHAR},
+      </if>
+      <if test="praiseHouseid != null">
+        praise_houseid = #{praiseHouseid,jdbcType=INTEGER},
+      </if>
+      <if test="praiseFatherId != null">
+        praise_father_id = #{praiseFatherId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangchuang.dealhouse.pojo.Praise">
+    update praise
+    set praise_commentator = #{praiseCommentator,jdbcType=VARCHAR},
+      praise_commentator_image = #{praiseCommentatorImage,jdbcType=VARCHAR},
+      praise_comment_content = #{praiseCommentContent,jdbcType=VARCHAR},
+      praise_comment_picture = #{praiseCommentPicture,jdbcType=VARCHAR},
+      praise_comment_time = #{praiseCommentTime,jdbcType=TIMESTAMP},
+      praise_praise = #{praisePraise,jdbcType=VARCHAR},
+      praise_houseid = #{praiseHouseid,jdbcType=INTEGER},
+      praise_father_id = #{praiseFatherId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

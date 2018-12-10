@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangchuang.dealhouse.mapper.RentingDetailsMapper">
+  <resultMap id="BaseResultMap" type="com.hangchuang.dealhouse.pojo.RentingDetails">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="rentingdetails_name" jdbcType="VARCHAR" property="rentingdetailsName" />
+    <result column="rentingdetails_rotation_picture" jdbcType="VARCHAR" property="rentingdetailsRotationPicture" />
+    <result column="rentingdetails_andress" jdbcType="VARCHAR" property="rentingdetailsAndress" />
+    <result column="rentingdetails_rent" jdbcType="DOUBLE" property="rentingdetailsRent" />
+    <result column="rentingdetails_apartment" jdbcType="INTEGER" property="rentingdetailsApartment" />
+    <result column="rentingdetails_area" jdbcType="VARCHAR" property="rentingdetailsArea" />
+    <result column="rentingdetails_release_time" jdbcType="TIMESTAMP" property="rentingdetailsReleaseTime" />
+    <result column="type_of_occupancy" jdbcType="VARCHAR" property="typeOfOccupancy" />
+    <result column="tenancy_time" jdbcType="TIMESTAMP" property="tenancyTime" />
+    <result column="house_type" jdbcType="VARCHAR" property="houseType" />
+    <result column="rentingdetails_floor" jdbcType="INTEGER" property="rentingdetailsFloor" />
+    <result column="rebtingdetails_water" jdbcType="VARCHAR" property="rebtingdetailsWater" />
+    <result column="rentingdetails_electricity" jdbcType="VARCHAR" property="rentingdetailsElectricity" />
+    <result column="rentingdetails_gas" jdbcType="VARCHAR" property="rentingdetailsGas" />
+    <result column="rentingdetails_heating" jdbcType="VARCHAR" property="rentingdetailsHeating" />
+    <result column="rentingdetails_elevator" jdbcType="VARCHAR" property="rentingdetailsElevator" />
+    <result column="rentingdetails_indoor_id" jdbcType="INTEGER" property="rentingdetailsIndoorId" />
+    <result column="rentingdetails_housingld" jdbcType="INTEGER" property="rentingdetailsHousingld" />
+    <result column="propertiesdetails_list_houseID" jdbcType="INTEGER" property="propertiesdetailsListHouseid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, rentingdetails_name, rentingdetails_rotation_picture, rentingdetails_andress, 
+    rentingdetails_rent, rentingdetails_apartment, rentingdetails_area, rentingdetails_release_time, 
+    type_of_occupancy, tenancy_time, house_type, rentingdetails_floor, rebtingdetails_water, 
+    rentingdetails_electricity, rentingdetails_gas, rentingdetails_heating, rentingdetails_elevator, 
+    rentingdetails_indoor_id, rentingdetails_housingld, propertiesdetails_list_houseID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rentingdetails
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from rentingdetails
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hangchuang.dealhouse.pojo.RentingDetails">
+    insert into rentingdetails (id, rentingdetails_name, rentingdetails_rotation_picture, 
+      rentingdetails_andress, rentingdetails_rent, 
+      rentingdetails_apartment, rentingdetails_area, 
+      rentingdetails_release_time, type_of_occupancy, 
+      tenancy_time, house_type, rentingdetails_floor, 
+      rebtingdetails_water, rentingdetails_electricity, 
+      rentingdetails_gas, rentingdetails_heating, 
+      rentingdetails_elevator, rentingdetails_indoor_id, 
+      rentingdetails_housingld, propertiesdetails_list_houseID
+      )
+    values (#{id,jdbcType=INTEGER}, #{rentingdetailsName,jdbcType=VARCHAR}, #{rentingdetailsRotationPicture,jdbcType=VARCHAR}, 
+      #{rentingdetailsAndress,jdbcType=VARCHAR}, #{rentingdetailsRent,jdbcType=DOUBLE}, 
+      #{rentingdetailsApartment,jdbcType=INTEGER}, #{rentingdetailsArea,jdbcType=VARCHAR}, 
+      #{rentingdetailsReleaseTime,jdbcType=TIMESTAMP}, #{typeOfOccupancy,jdbcType=VARCHAR}, 
+      #{tenancyTime,jdbcType=TIMESTAMP}, #{houseType,jdbcType=VARCHAR}, #{rentingdetailsFloor,jdbcType=INTEGER}, 
+      #{rebtingdetailsWater,jdbcType=VARCHAR}, #{rentingdetailsElectricity,jdbcType=VARCHAR}, 
+      #{rentingdetailsGas,jdbcType=VARCHAR}, #{rentingdetailsHeating,jdbcType=VARCHAR}, 
+      #{rentingdetailsElevator,jdbcType=VARCHAR}, #{rentingdetailsIndoorId,jdbcType=INTEGER}, 
+      #{rentingdetailsHousingld,jdbcType=INTEGER}, #{propertiesdetailsListHouseid,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.RentingDetails">
+    insert into rentingdetails
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="rentingdetailsName != null">
+        rentingdetails_name,
+      </if>
+      <if test="rentingdetailsRotationPicture != null">
+        rentingdetails_rotation_picture,
+      </if>
+      <if test="rentingdetailsAndress != null">
+        rentingdetails_andress,
+      </if>
+      <if test="rentingdetailsRent != null">
+        rentingdetails_rent,
+      </if>
+      <if test="rentingdetailsApartment != null">
+        rentingdetails_apartment,
+      </if>
+      <if test="rentingdetailsArea != null">
+        rentingdetails_area,
+      </if>
+      <if test="rentingdetailsReleaseTime != null">
+        rentingdetails_release_time,
+      </if>
+      <if test="typeOfOccupancy != null">
+        type_of_occupancy,
+      </if>
+      <if test="tenancyTime != null">
+        tenancy_time,
+      </if>
+      <if test="houseType != null">
+        house_type,
+      </if>
+      <if test="rentingdetailsFloor != null">
+        rentingdetails_floor,
+      </if>
+      <if test="rebtingdetailsWater != null">
+        rebtingdetails_water,
+      </if>
+      <if test="rentingdetailsElectricity != null">
+        rentingdetails_electricity,
+      </if>
+      <if test="rentingdetailsGas != null">
+        rentingdetails_gas,
+      </if>
+      <if test="rentingdetailsHeating != null">
+        rentingdetails_heating,
+      </if>
+      <if test="rentingdetailsElevator != null">
+        rentingdetails_elevator,
+      </if>
+      <if test="rentingdetailsIndoorId != null">
+        rentingdetails_indoor_id,
+      </if>
+      <if test="rentingdetailsHousingld != null">
+        rentingdetails_housingld,
+      </if>
+      <if test="propertiesdetailsListHouseid != null">
+        propertiesdetails_list_houseID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="rentingdetailsName != null">
+        #{rentingdetailsName,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsRotationPicture != null">
+        #{rentingdetailsRotationPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsAndress != null">
+        #{rentingdetailsAndress,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsRent != null">
+        #{rentingdetailsRent,jdbcType=DOUBLE},
+      </if>
+      <if test="rentingdetailsApartment != null">
+        #{rentingdetailsApartment,jdbcType=INTEGER},
+      </if>
+      <if test="rentingdetailsArea != null">
+        #{rentingdetailsArea,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsReleaseTime != null">
+        #{rentingdetailsReleaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeOfOccupancy != null">
+        #{typeOfOccupancy,jdbcType=VARCHAR},
+      </if>
+      <if test="tenancyTime != null">
+        #{tenancyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="houseType != null">
+        #{houseType,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsFloor != null">
+        #{rentingdetailsFloor,jdbcType=INTEGER},
+      </if>
+      <if test="rebtingdetailsWater != null">
+        #{rebtingdetailsWater,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsElectricity != null">
+        #{rentingdetailsElectricity,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsGas != null">
+        #{rentingdetailsGas,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsHeating != null">
+        #{rentingdetailsHeating,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsElevator != null">
+        #{rentingdetailsElevator,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsIndoorId != null">
+        #{rentingdetailsIndoorId,jdbcType=INTEGER},
+      </if>
+      <if test="rentingdetailsHousingld != null">
+        #{rentingdetailsHousingld,jdbcType=INTEGER},
+      </if>
+      <if test="propertiesdetailsListHouseid != null">
+        #{propertiesdetailsListHouseid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangchuang.dealhouse.pojo.RentingDetails">
+    update rentingdetails
+    <set>
+      <if test="rentingdetailsName != null">
+        rentingdetails_name = #{rentingdetailsName,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsRotationPicture != null">
+        rentingdetails_rotation_picture = #{rentingdetailsRotationPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsAndress != null">
+        rentingdetails_andress = #{rentingdetailsAndress,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsRent != null">
+        rentingdetails_rent = #{rentingdetailsRent,jdbcType=DOUBLE},
+      </if>
+      <if test="rentingdetailsApartment != null">
+        rentingdetails_apartment = #{rentingdetailsApartment,jdbcType=INTEGER},
+      </if>
+      <if test="rentingdetailsArea != null">
+        rentingdetails_area = #{rentingdetailsArea,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsReleaseTime != null">
+        rentingdetails_release_time = #{rentingdetailsReleaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeOfOccupancy != null">
+        type_of_occupancy = #{typeOfOccupancy,jdbcType=VARCHAR},
+      </if>
+      <if test="tenancyTime != null">
+        tenancy_time = #{tenancyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="houseType != null">
+        house_type = #{houseType,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsFloor != null">
+        rentingdetails_floor = #{rentingdetailsFloor,jdbcType=INTEGER},
+      </if>
+      <if test="rebtingdetailsWater != null">
+        rebtingdetails_water = #{rebtingdetailsWater,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsElectricity != null">
+        rentingdetails_electricity = #{rentingdetailsElectricity,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsGas != null">
+        rentingdetails_gas = #{rentingdetailsGas,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsHeating != null">
+        rentingdetails_heating = #{rentingdetailsHeating,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsElevator != null">
+        rentingdetails_elevator = #{rentingdetailsElevator,jdbcType=VARCHAR},
+      </if>
+      <if test="rentingdetailsIndoorId != null">
+        rentingdetails_indoor_id = #{rentingdetailsIndoorId,jdbcType=INTEGER},
+      </if>
+      <if test="rentingdetailsHousingld != null">
+        rentingdetails_housingld = #{rentingdetailsHousingld,jdbcType=INTEGER},
+      </if>
+      <if test="propertiesdetailsListHouseid != null">
+        propertiesdetails_list_houseID = #{propertiesdetailsListHouseid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangchuang.dealhouse.pojo.RentingDetails">
+    update rentingdetails
+    set rentingdetails_name = #{rentingdetailsName,jdbcType=VARCHAR},
+      rentingdetails_rotation_picture = #{rentingdetailsRotationPicture,jdbcType=VARCHAR},
+      rentingdetails_andress = #{rentingdetailsAndress,jdbcType=VARCHAR},
+      rentingdetails_rent = #{rentingdetailsRent,jdbcType=DOUBLE},
+      rentingdetails_apartment = #{rentingdetailsApartment,jdbcType=INTEGER},
+      rentingdetails_area = #{rentingdetailsArea,jdbcType=VARCHAR},
+      rentingdetails_release_time = #{rentingdetailsReleaseTime,jdbcType=TIMESTAMP},
+      type_of_occupancy = #{typeOfOccupancy,jdbcType=VARCHAR},
+      tenancy_time = #{tenancyTime,jdbcType=TIMESTAMP},
+      house_type = #{houseType,jdbcType=VARCHAR},
+      rentingdetails_floor = #{rentingdetailsFloor,jdbcType=INTEGER},
+      rebtingdetails_water = #{rebtingdetailsWater,jdbcType=VARCHAR},
+      rentingdetails_electricity = #{rentingdetailsElectricity,jdbcType=VARCHAR},
+      rentingdetails_gas = #{rentingdetailsGas,jdbcType=VARCHAR},
+      rentingdetails_heating = #{rentingdetailsHeating,jdbcType=VARCHAR},
+      rentingdetails_elevator = #{rentingdetailsElevator,jdbcType=VARCHAR},
+      rentingdetails_indoor_id = #{rentingdetailsIndoorId,jdbcType=INTEGER},
+      rentingdetails_housingld = #{rentingdetailsHousingld,jdbcType=INTEGER},
+      propertiesdetails_list_houseID = #{propertiesdetailsListHouseid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

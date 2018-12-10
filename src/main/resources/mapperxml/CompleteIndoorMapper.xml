@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangchuang.dealhouse.mapper.CompleteIndoorMapper">
+  <resultMap id="BaseResultMap" type="com.hangchuang.dealhouse.pojo.CompleteIndoor">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="complete_name" jdbcType="VARCHAR" property="completeName" />
+    <result column="complete_picture" jdbcType="VARCHAR" property="completePicture" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, complete_name, complete_picture
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from complete_indoor
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from complete_indoor
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hangchuang.dealhouse.pojo.CompleteIndoor">
+    insert into complete_indoor (id, complete_name, complete_picture
+      )
+    values (#{id,jdbcType=INTEGER}, #{completeName,jdbcType=VARCHAR}, #{completePicture,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.CompleteIndoor">
+    insert into complete_indoor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="completeName != null">
+        complete_name,
+      </if>
+      <if test="completePicture != null">
+        complete_picture,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="completeName != null">
+        #{completeName,jdbcType=VARCHAR},
+      </if>
+      <if test="completePicture != null">
+        #{completePicture,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangchuang.dealhouse.pojo.CompleteIndoor">
+    update complete_indoor
+    <set>
+      <if test="completeName != null">
+        complete_name = #{completeName,jdbcType=VARCHAR},
+      </if>
+      <if test="completePicture != null">
+        complete_picture = #{completePicture,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangchuang.dealhouse.pojo.CompleteIndoor">
+    update complete_indoor
+    set complete_name = #{completeName,jdbcType=VARCHAR},
+      complete_picture = #{completePicture,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

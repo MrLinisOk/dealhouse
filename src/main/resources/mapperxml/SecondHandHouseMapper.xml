@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangchuang.dealhouse.mapper.SecondHandHouseMapper">
+  <resultMap id="BaseResultMap" type="com.hangchuang.dealhouse.pojo.SecondHandHouse">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="second_house_title" jdbcType="VARCHAR" property="secondHouseTitle" />
+    <result column="second_house_huxing" jdbcType="INTEGER" property="secondHouseHuxing" />
+    <result column="second_house_measure" jdbcType="INTEGER" property="secondHouseMeasure" />
+    <result column="second_house_orientation" jdbcType="CHAR" property="secondHouseOrientation" />
+    <result column="second_house_region" jdbcType="VARCHAR" property="secondHouseRegion" />
+    <result column="second_house_subway" jdbcType="VARCHAR" property="secondHouseSubway" />
+    <result column="second_house_years" jdbcType="VARCHAR" property="secondHouseYears" />
+    <result column="second_house_see" jdbcType="VARCHAR" property="secondHouseSee" />
+    <result column="second_house_total_price" jdbcType="DOUBLE" property="secondHouseTotalPrice" />
+    <result column="second_house_average_price" jdbcType="DOUBLE" property="secondHouseAveragePrice" />
+    <result column="second_house_grade" jdbcType="VARCHAR" property="secondHouseGrade" />
+    <result column="second_house_lift" jdbcType="CHAR" property="secondHouseLift" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, second_house_title, second_house_huxing, second_house_measure, second_house_orientation, 
+    second_house_region, second_house_subway, second_house_years, second_house_see, second_house_total_price, 
+    second_house_average_price, second_house_grade, second_house_lift
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from second_hand_house
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from second_hand_house
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hangchuang.dealhouse.pojo.SecondHandHouse">
+    insert into second_hand_house (id, second_house_title, second_house_huxing, 
+      second_house_measure, second_house_orientation, 
+      second_house_region, second_house_subway, second_house_years, 
+      second_house_see, second_house_total_price, second_house_average_price, 
+      second_house_grade, second_house_lift)
+    values (#{id,jdbcType=INTEGER}, #{secondHouseTitle,jdbcType=VARCHAR}, #{secondHouseHuxing,jdbcType=INTEGER}, 
+      #{secondHouseMeasure,jdbcType=INTEGER}, #{secondHouseOrientation,jdbcType=CHAR}, 
+      #{secondHouseRegion,jdbcType=VARCHAR}, #{secondHouseSubway,jdbcType=VARCHAR}, #{secondHouseYears,jdbcType=VARCHAR}, 
+      #{secondHouseSee,jdbcType=VARCHAR}, #{secondHouseTotalPrice,jdbcType=DOUBLE}, #{secondHouseAveragePrice,jdbcType=DOUBLE}, 
+      #{secondHouseGrade,jdbcType=VARCHAR}, #{secondHouseLift,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.SecondHandHouse">
+    insert into second_hand_house
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="secondHouseTitle != null">
+        second_house_title,
+      </if>
+      <if test="secondHouseHuxing != null">
+        second_house_huxing,
+      </if>
+      <if test="secondHouseMeasure != null">
+        second_house_measure,
+      </if>
+      <if test="secondHouseOrientation != null">
+        second_house_orientation,
+      </if>
+      <if test="secondHouseRegion != null">
+        second_house_region,
+      </if>
+      <if test="secondHouseSubway != null">
+        second_house_subway,
+      </if>
+      <if test="secondHouseYears != null">
+        second_house_years,
+      </if>
+      <if test="secondHouseSee != null">
+        second_house_see,
+      </if>
+      <if test="secondHouseTotalPrice != null">
+        second_house_total_price,
+      </if>
+      <if test="secondHouseAveragePrice != null">
+        second_house_average_price,
+      </if>
+      <if test="secondHouseGrade != null">
+        second_house_grade,
+      </if>
+      <if test="secondHouseLift != null">
+        second_house_lift,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="secondHouseTitle != null">
+        #{secondHouseTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="secondHouseHuxing != null">
+        #{secondHouseHuxing,jdbcType=INTEGER},
+      </if>
+      <if test="secondHouseMeasure != null">
+        #{secondHouseMeasure,jdbcType=INTEGER},
+      </if>
+      <if test="secondHouseOrientation != null">
+        #{secondHouseOrientation,jdbcType=CHAR},
+      </if>
+      <if test="secondHouseRegion != null">
+        #{secondHouseRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="secondHouseSubway != null">
+        #{secondHouseSubway,jdbcType=VARCHAR},
+      </if>
+      <if test="secondHouseYears != null">
+        #{secondHouseYears,jdbcType=VARCHAR},
+      </if>
+      <if test="secondHouseSee != null">
+        #{secondHouseSee,jdbcType=VARCHAR},
+      </if>
+      <if test="secondHouseTotalPrice != null">
+        #{secondHouseTotalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="secondHouseAveragePrice != null">
+        #{secondHouseAveragePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="secondHouseGrade != null">
+        #{secondHouseGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="secondHouseLift != null">
+        #{secondHouseLift,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangchuang.dealhouse.pojo.SecondHandHouse">
+    update second_hand_house
+    <set>
+      <if test="secondHouseTitle != null">
+        second_house_title = #{secondHouseTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="secondHouseHuxing != null">
+        second_house_huxing = #{secondHouseHuxing,jdbcType=INTEGER},
+      </if>
+      <if test="secondHouseMeasure != null">
+        second_house_measure = #{secondHouseMeasure,jdbcType=INTEGER},
+      </if>
+      <if test="secondHouseOrientation != null">
+        second_house_orientation = #{secondHouseOrientation,jdbcType=CHAR},
+      </if>
+      <if test="secondHouseRegion != null">
+        second_house_region = #{secondHouseRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="secondHouseSubway != null">
+        second_house_subway = #{secondHouseSubway,jdbcType=VARCHAR},
+      </if>
+      <if test="secondHouseYears != null">
+        second_house_years = #{secondHouseYears,jdbcType=VARCHAR},
+      </if>
+      <if test="secondHouseSee != null">
+        second_house_see = #{secondHouseSee,jdbcType=VARCHAR},
+      </if>
+      <if test="secondHouseTotalPrice != null">
+        second_house_total_price = #{secondHouseTotalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="secondHouseAveragePrice != null">
+        second_house_average_price = #{secondHouseAveragePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="secondHouseGrade != null">
+        second_house_grade = #{secondHouseGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="secondHouseLift != null">
+        second_house_lift = #{secondHouseLift,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangchuang.dealhouse.pojo.SecondHandHouse">
+    update second_hand_house
+    set second_house_title = #{secondHouseTitle,jdbcType=VARCHAR},
+      second_house_huxing = #{secondHouseHuxing,jdbcType=INTEGER},
+      second_house_measure = #{secondHouseMeasure,jdbcType=INTEGER},
+      second_house_orientation = #{secondHouseOrientation,jdbcType=CHAR},
+      second_house_region = #{secondHouseRegion,jdbcType=VARCHAR},
+      second_house_subway = #{secondHouseSubway,jdbcType=VARCHAR},
+      second_house_years = #{secondHouseYears,jdbcType=VARCHAR},
+      second_house_see = #{secondHouseSee,jdbcType=VARCHAR},
+      second_house_total_price = #{secondHouseTotalPrice,jdbcType=DOUBLE},
+      second_house_average_price = #{secondHouseAveragePrice,jdbcType=DOUBLE},
+      second_house_grade = #{secondHouseGrade,jdbcType=VARCHAR},
+      second_house_lift = #{secondHouseLift,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

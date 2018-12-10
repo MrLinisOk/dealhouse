@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangchuang.dealhouse.mapper.NegativeCommentMapper">
+  <resultMap id="BaseResultMap" type="com.hangchuang.dealhouse.pojo.NegativeComment">
+    <result column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="negative_comment_picture" jdbcType="VARCHAR" property="negativeCommentPicture" />
+    <result column="negative_comment_time" jdbcType="TIMESTAMP" property="negativeCommentTime" />
+    <result column="negative_praise" jdbcType="VARCHAR" property="negativePraise" />
+    <result column="negative_houseid" jdbcType="INTEGER" property="negativeHouseid" />
+    <result column="negative_father_id" jdbcType="INTEGER" property="negativeFatherId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.hangchuang.dealhouse.pojo.NegativeComment">
+    <result column="negative_comment_content" jdbcType="LONGVARCHAR" property="negativeCommentContent" />
+  </resultMap>
+  <sql id="Blob_Column_List">
+    negative_comment_content
+  </sql>
+  <insert id="insert" parameterType="com.hangchuang.dealhouse.pojo.NegativeComment">
+    insert into negative_comment (userid, negative_comment_picture, negative_comment_time, 
+      negative_praise, negative_houseid, negative_father_id, 
+      negative_comment_content)
+    values (#{userid,jdbcType=INTEGER}, #{negativeCommentPicture,jdbcType=VARCHAR}, #{negativeCommentTime,jdbcType=TIMESTAMP}, 
+      #{negativePraise,jdbcType=VARCHAR}, #{negativeHouseid,jdbcType=INTEGER}, #{negativeFatherId,jdbcType=INTEGER}, 
+      #{negativeCommentContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.NegativeComment">
+    insert into negative_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="negativeCommentPicture != null">
+        negative_comment_picture,
+      </if>
+      <if test="negativeCommentTime != null">
+        negative_comment_time,
+      </if>
+      <if test="negativePraise != null">
+        negative_praise,
+      </if>
+      <if test="negativeHouseid != null">
+        negative_houseid,
+      </if>
+      <if test="negativeFatherId != null">
+        negative_father_id,
+      </if>
+      <if test="negativeCommentContent != null">
+        negative_comment_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="negativeCommentPicture != null">
+        #{negativeCommentPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="negativeCommentTime != null">
+        #{negativeCommentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="negativePraise != null">
+        #{negativePraise,jdbcType=VARCHAR},
+      </if>
+      <if test="negativeHouseid != null">
+        #{negativeHouseid,jdbcType=INTEGER},
+      </if>
+      <if test="negativeFatherId != null">
+        #{negativeFatherId,jdbcType=INTEGER},
+      </if>
+      <if test="negativeCommentContent != null">
+        #{negativeCommentContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

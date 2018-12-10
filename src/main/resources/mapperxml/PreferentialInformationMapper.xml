@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hangchuang.dealhouse.mapper.PreferentialInformationMapper">
+  <resultMap id="BaseResultMap" type="com.hangchuang.dealhouse.pojo.PreferentialInformation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="preferential_title" jdbcType="VARCHAR" property="preferentialTitle" />
+    <result column="preferential_time" jdbcType="TIMESTAMP" property="preferentialTime" />
+    <result column="preferential_content" jdbcType="VARCHAR" property="preferentialContent" />
+    <result column="preferential_picture" jdbcType="VARCHAR" property="preferentialPicture" />
+    <result column="preferential_houseid" jdbcType="INTEGER" property="preferentialHouseid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, preferential_title, preferential_time, preferential_content, preferential_picture, 
+    preferential_houseid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from preferential_information
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from preferential_information
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hangchuang.dealhouse.pojo.PreferentialInformation">
+    insert into preferential_information (id, preferential_title, preferential_time, 
+      preferential_content, preferential_picture, 
+      preferential_houseid)
+    values (#{id,jdbcType=INTEGER}, #{preferentialTitle,jdbcType=VARCHAR}, #{preferentialTime,jdbcType=TIMESTAMP}, 
+      #{preferentialContent,jdbcType=VARCHAR}, #{preferentialPicture,jdbcType=VARCHAR}, 
+      #{preferentialHouseid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.PreferentialInformation">
+    insert into preferential_information
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="preferentialTitle != null">
+        preferential_title,
+      </if>
+      <if test="preferentialTime != null">
+        preferential_time,
+      </if>
+      <if test="preferentialContent != null">
+        preferential_content,
+      </if>
+      <if test="preferentialPicture != null">
+        preferential_picture,
+      </if>
+      <if test="preferentialHouseid != null">
+        preferential_houseid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="preferentialTitle != null">
+        #{preferentialTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="preferentialTime != null">
+        #{preferentialTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="preferentialContent != null">
+        #{preferentialContent,jdbcType=VARCHAR},
+      </if>
+      <if test="preferentialPicture != null">
+        #{preferentialPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="preferentialHouseid != null">
+        #{preferentialHouseid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangchuang.dealhouse.pojo.PreferentialInformation">
+    update preferential_information
+    <set>
+      <if test="preferentialTitle != null">
+        preferential_title = #{preferentialTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="preferentialTime != null">
+        preferential_time = #{preferentialTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="preferentialContent != null">
+        preferential_content = #{preferentialContent,jdbcType=VARCHAR},
+      </if>
+      <if test="preferentialPicture != null">
+        preferential_picture = #{preferentialPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="preferentialHouseid != null">
+        preferential_houseid = #{preferentialHouseid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hangchuang.dealhouse.pojo.PreferentialInformation">
+    update preferential_information
+    set preferential_title = #{preferentialTitle,jdbcType=VARCHAR},
+      preferential_time = #{preferentialTime,jdbcType=TIMESTAMP},
+      preferential_content = #{preferentialContent,jdbcType=VARCHAR},
+      preferential_picture = #{preferentialPicture,jdbcType=VARCHAR},
+      preferential_houseid = #{preferentialHouseid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
