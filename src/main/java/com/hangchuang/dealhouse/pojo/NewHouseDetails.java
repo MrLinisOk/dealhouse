@@ -27,6 +27,8 @@ public class NewHouseDetails {
 
     private Integer newDetailsComment;
 
+    private Integer newDetailsListid;
+
     public Integer getId() {
         return id;
     }
@@ -121,5 +123,13 @@ public class NewHouseDetails {
 
     public void setNewDetailsComment(Integer newDetailsComment) {
         this.newDetailsComment = newDetailsComment;
+    }
+
+    public Integer getNewDetailsListid() {
+        return newDetailsListid;
+    }
+
+    public void setNewDetailsListid(Integer newDetailsListid) {
+        this.newDetailsListid = newDetailsListid;
     }
 }

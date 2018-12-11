@@ -2,7 +2,7 @@ package com.hangchuang.dealhouse.pojo;
 
 import java.util.Date;
 
-public class SecondHandHousedetails {
+public class SecondHandHouseDetails {
     private Integer id;
 
     private String seconddetailsName;
@@ -40,6 +40,10 @@ public class SecondHandHousedetails {
     private Integer introductionId;
 
     private Integer rentingdetailsIndoorId;
+
+    private Integer seconddetailsIndoorId;
+
+    private Integer seconddetailsInformationId;
 
     public Integer getId() {
         return id;
@@ -191,5 +195,21 @@ public class SecondHandHousedetails {
 
     public void setRentingdetailsIndoorId(Integer rentingdetailsIndoorId) {
         this.rentingdetailsIndoorId = rentingdetailsIndoorId;
+    }
+
+    public Integer getSeconddetailsIndoorId() {
+        return seconddetailsIndoorId;
+    }
+
+    public void setSeconddetailsIndoorId(Integer seconddetailsIndoorId) {
+        this.seconddetailsIndoorId = seconddetailsIndoorId;
+    }
+
+    public Integer getSeconddetailsInformationId() {
+        return seconddetailsInformationId;
+    }
+
+    public void setSeconddetailsInformationId(Integer seconddetailsInformationId) {
+        this.seconddetailsInformationId = seconddetailsInformationId;
     }
 }

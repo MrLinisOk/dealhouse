@@ -27,6 +27,8 @@ public class SecondHandHouse {
 
     private String secondHouseLift;
 
+    private Integer secondHouseDetailsid;
+
     public Integer getId() {
         return id;
     }
@@ -129,5 +131,13 @@ public class SecondHandHouse {
 
     public void setSecondHouseLift(String secondHouseLift) {
         this.secondHouseLift = secondHouseLift == null ? null : secondHouseLift.trim();
+    }
+
+    public Integer getSecondHouseDetailsid() {
+        return secondHouseDetailsid;
+    }
+
+    public void setSecondHouseDetailsid(Integer secondHouseDetailsid) {
+        this.secondHouseDetailsid = secondHouseDetailsid;
     }
 }

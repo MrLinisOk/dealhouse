@@ -2,16 +2,10 @@ package com.hangchuang.dealhouse.mapper;
 
 import com.hangchuang.dealhouse.pojo.RentingHouse;
 
+import java.util.List;
+import java.util.Map;
+
 public interface RentingHouseMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(RentingHouse record);
-
-    int insertSelective(RentingHouse record);
-
-    RentingHouse selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(RentingHouse record);
-
-    int updateByPrimaryKey(RentingHouse record);
+    List<RentingHouse> dynamicQuery(Map<String, Object> map);
 }

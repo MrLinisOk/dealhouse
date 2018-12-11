@@ -1,17 +1,17 @@
 package com.hangchuang.dealhouse.mapper;
 
-import com.hangchuang.dealhouse.pojo.SecondHandHousedetails;
+import com.hangchuang.dealhouse.pojo.SecondHandHouseDetails;
 
-public interface SecondHandHousedetailsMapper {
+public interface SecondHandHouseDetailsMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(SecondHandHousedetails record);
+    int insert(SecondHandHouseDetails record);
 
-    int insertSelective(SecondHandHousedetails record);
+    int insertSelective(SecondHandHouseDetails record);
 
-    SecondHandHousedetails selectByPrimaryKey(Integer id);
+    SecondHandHouseDetails selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(SecondHandHousedetails record);
+    int updateByPrimaryKeySelective(SecondHandHouseDetails record);
 
-    int updateByPrimaryKey(SecondHandHousedetails record);
+    int updateByPrimaryKey(SecondHandHouseDetails record);
 }

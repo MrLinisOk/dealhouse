@@ -17,6 +17,8 @@ public class NewHouseList {
 
     private Integer countryId;
 
+    private Integer newHouseDetailsid;
+
     public Integer getId() {
         return id;
     }
@@ -79,5 +81,13 @@ public class NewHouseList {
 
     public void setCountryId(Integer countryId) {
         this.countryId = countryId;
+    }
+
+    public Integer getNewHouseDetailsid() {
+        return newHouseDetailsid;
+    }
+
+    public void setNewHouseDetailsid(Integer newHouseDetailsid) {
+        this.newHouseDetailsid = newHouseDetailsid;
     }
 }

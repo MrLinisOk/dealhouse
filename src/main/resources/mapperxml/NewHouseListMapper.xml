@@ -10,10 +10,11 @@
     <result column="new_house_averageprice" jdbcType="DOUBLE" property="newHouseAverageprice" />
     <result column="new_house_grade" jdbcType="VARCHAR" property="newHouseGrade" />
     <result column="country_id" jdbcType="INTEGER" property="countryId" />
+    <result column="new_house_detailsid" jdbcType="INTEGER" property="newHouseDetailsid" />
   </resultMap>
   <sql id="Base_Column_List">
     id, new_house_title, new_house_measure, new_house_region, new_house_housingId, new_house_averageprice, 
-    new_house_grade, country_id
+    new_house_grade, country_id, new_house_detailsid
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -28,10 +29,12 @@
   <insert id="insert" parameterType="com.hangchuang.dealhouse.pojo.NewHouseList">
     insert into new_house_list (id, new_house_title, new_house_measure, 
       new_house_region, new_house_housingId, new_house_averageprice, 
-      new_house_grade, country_id)
+      new_house_grade, country_id, new_house_detailsid
+      )
     values (#{id,jdbcType=INTEGER}, #{newHouseTitle,jdbcType=VARCHAR}, #{newHouseMeasure,jdbcType=INTEGER}, 
       #{newHouseRegion,jdbcType=VARCHAR}, #{newHouseHousingid,jdbcType=VARCHAR}, #{newHouseAverageprice,jdbcType=DOUBLE}, 
-      #{newHouseGrade,jdbcType=VARCHAR}, #{countryId,jdbcType=INTEGER})
+      #{newHouseGrade,jdbcType=VARCHAR}, #{countryId,jdbcType=INTEGER}, #{newHouseDetailsid,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.NewHouseList">
     insert into new_house_list
@@ -60,6 +63,9 @@
       <if test="countryId != null">
         country_id,
       </if>
+      <if test="newHouseDetailsid != null">
+        new_house_detailsid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -85,6 +91,9 @@
       </if>
       <if test="countryId != null">
         #{countryId,jdbcType=INTEGER},
+      </if>
+      <if test="newHouseDetailsid != null">
+        #{newHouseDetailsid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -112,6 +121,9 @@
       <if test="countryId != null">
         country_id = #{countryId,jdbcType=INTEGER},
       </if>
+      <if test="newHouseDetailsid != null">
+        new_house_detailsid = #{newHouseDetailsid,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -123,7 +135,8 @@
       new_house_housingId = #{newHouseHousingid,jdbcType=VARCHAR},
       new_house_averageprice = #{newHouseAverageprice,jdbcType=DOUBLE},
       new_house_grade = #{newHouseGrade,jdbcType=VARCHAR},
-      country_id = #{countryId,jdbcType=INTEGER}
+      country_id = #{countryId,jdbcType=INTEGER},
+      new_house_detailsid = #{newHouseDetailsid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

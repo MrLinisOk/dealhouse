@@ -2,16 +2,9 @@ package com.hangchuang.dealhouse.mapper;
 
 import com.hangchuang.dealhouse.pojo.Area;
 
+import javax.validation.constraints.Size;
+
 public interface AreaMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(Area record);
-
-    int insertSelective(Area record);
-
-    Area selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Area record);
-
-    int updateByPrimaryKey(Area record);
+    Area selectAreaByShorName(String shortname);
 }

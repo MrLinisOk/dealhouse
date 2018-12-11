@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hangchuang.dealhouse.mapper.SecondHandHousedetailsMapper">
-  <resultMap id="BaseResultMap" type="com.hangchuang.dealhouse.pojo.SecondHandHousedetails">
+<mapper namespace="com.hangchuang.dealhouse.mapper.SecondHandHouseDetailsMapper">
+  <resultMap id="BaseResultMap" type="com.hangchuang.dealhouse.pojo.SecondHandHouseDetails">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="seconddetails_name" jdbcType="VARCHAR" property="seconddetailsName" />
     <result column="seconddetails_rotation_picture" jdbcType="VARCHAR" property="seconddetailsRotationPicture" />
@@ -21,13 +21,15 @@
     <result column="seconddetails_elevator" jdbcType="CHAR" property="seconddetailsElevator" />
     <result column="introduction_id" jdbcType="INTEGER" property="introductionId" />
     <result column="rentingdetails_indoor_id" jdbcType="INTEGER" property="rentingdetailsIndoorId" />
+    <result column="seconddetails_indoor_id" jdbcType="INTEGER" property="seconddetailsIndoorId" />
+    <result column="seconddetails_Information_id" jdbcType="INTEGER" property="seconddetailsInformationId" />
   </resultMap>
   <sql id="Base_Column_List">
     id, seconddetails_name, seconddetails_rotation_picture, seconddetails_address, seconddetails_selling_price, 
     seconddetails_huxing, seconddetails_area, seconddetails_average_price, seconddetails_floor, 
     seconddetails_orientation, seconddetails_age, seconddetails_plate_type, seconddetails_listing_time, 
     seconddetails_renovation, seconddetails_ownership, seconddetails_purpose, seconddetails_elevator, 
-    introduction_id, rentingdetails_indoor_id
+    introduction_id, rentingdetails_indoor_id, seconddetails_indoor_id, seconddetails_Information_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -39,7 +41,7 @@
     delete from second_hand_housedetails
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.hangchuang.dealhouse.pojo.SecondHandHousedetails">
+  <insert id="insert" parameterType="com.hangchuang.dealhouse.pojo.SecondHandHouseDetails">
     insert into second_hand_housedetails (id, seconddetails_name, seconddetails_rotation_picture, 
       seconddetails_address, seconddetails_selling_price, 
       seconddetails_huxing, seconddetails_area, 
@@ -48,7 +50,9 @@
       seconddetails_plate_type, seconddetails_listing_time, 
       seconddetails_renovation, seconddetails_ownership, 
       seconddetails_purpose, seconddetails_elevator, 
-      introduction_id, rentingdetails_indoor_id)
+      introduction_id, rentingdetails_indoor_id, 
+      seconddetails_indoor_id, seconddetails_Information_id
+      )
     values (#{id,jdbcType=INTEGER}, #{seconddetailsName,jdbcType=VARCHAR}, #{seconddetailsRotationPicture,jdbcType=VARCHAR}, 
       #{seconddetailsAddress,jdbcType=VARCHAR}, #{seconddetailsSellingPrice,jdbcType=DOUBLE}, 
       #{seconddetailsHuxing,jdbcType=INTEGER}, #{seconddetailsArea,jdbcType=INTEGER}, 
@@ -57,9 +61,11 @@
       #{seconddetailsPlateType,jdbcType=VARCHAR}, #{seconddetailsListingTime,jdbcType=DATE}, 
       #{seconddetailsRenovation,jdbcType=CHAR}, #{seconddetailsOwnership,jdbcType=VARCHAR}, 
       #{seconddetailsPurpose,jdbcType=VARCHAR}, #{seconddetailsElevator,jdbcType=CHAR}, 
-      #{introductionId,jdbcType=INTEGER}, #{rentingdetailsIndoorId,jdbcType=INTEGER})
+      #{introductionId,jdbcType=INTEGER}, #{rentingdetailsIndoorId,jdbcType=INTEGER}, 
+      #{seconddetailsIndoorId,jdbcType=INTEGER}, #{seconddetailsInformationId,jdbcType=INTEGER}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.SecondHandHousedetails">
+  <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.SecondHandHouseDetails">
     insert into second_hand_housedetails
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -118,6 +124,12 @@
       </if>
       <if test="rentingdetailsIndoorId != null">
         rentingdetails_indoor_id,
+      </if>
+      <if test="seconddetailsIndoorId != null">
+        seconddetails_indoor_id,
+      </if>
+      <if test="seconddetailsInformationId != null">
+        seconddetails_Information_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -178,9 +190,15 @@
       <if test="rentingdetailsIndoorId != null">
         #{rentingdetailsIndoorId,jdbcType=INTEGER},
       </if>
+      <if test="seconddetailsIndoorId != null">
+        #{seconddetailsIndoorId,jdbcType=INTEGER},
+      </if>
+      <if test="seconddetailsInformationId != null">
+        #{seconddetailsInformationId,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hangchuang.dealhouse.pojo.SecondHandHousedetails">
+  <update id="updateByPrimaryKeySelective" parameterType="com.hangchuang.dealhouse.pojo.SecondHandHouseDetails">
     update second_hand_housedetails
     <set>
       <if test="seconddetailsName != null">
@@ -237,10 +255,16 @@
       <if test="rentingdetailsIndoorId != null">
         rentingdetails_indoor_id = #{rentingdetailsIndoorId,jdbcType=INTEGER},
       </if>
+      <if test="seconddetailsIndoorId != null">
+        seconddetails_indoor_id = #{seconddetailsIndoorId,jdbcType=INTEGER},
+      </if>
+      <if test="seconddetailsInformationId != null">
+        seconddetails_Information_id = #{seconddetailsInformationId,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.hangchuang.dealhouse.pojo.SecondHandHousedetails">
+  <update id="updateByPrimaryKey" parameterType="com.hangchuang.dealhouse.pojo.SecondHandHouseDetails">
     update second_hand_housedetails
     set seconddetails_name = #{seconddetailsName,jdbcType=VARCHAR},
       seconddetails_rotation_picture = #{seconddetailsRotationPicture,jdbcType=VARCHAR},
@@ -259,7 +283,9 @@
       seconddetails_purpose = #{seconddetailsPurpose,jdbcType=VARCHAR},
       seconddetails_elevator = #{seconddetailsElevator,jdbcType=CHAR},
       introduction_id = #{introductionId,jdbcType=INTEGER},
-      rentingdetails_indoor_id = #{rentingdetailsIndoorId,jdbcType=INTEGER}
+      rentingdetails_indoor_id = #{rentingdetailsIndoorId,jdbcType=INTEGER},
+      seconddetails_indoor_id = #{seconddetailsIndoorId,jdbcType=INTEGER},
+      seconddetails_Information_id = #{seconddetailsInformationId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -15,11 +15,12 @@
     <result column="second_house_average_price" jdbcType="DOUBLE" property="secondHouseAveragePrice" />
     <result column="second_house_grade" jdbcType="VARCHAR" property="secondHouseGrade" />
     <result column="second_house_lift" jdbcType="CHAR" property="secondHouseLift" />
+    <result column="second_house_detailsid" jdbcType="INTEGER" property="secondHouseDetailsid" />
   </resultMap>
   <sql id="Base_Column_List">
     id, second_house_title, second_house_huxing, second_house_measure, second_house_orientation, 
     second_house_region, second_house_subway, second_house_years, second_house_see, second_house_total_price, 
-    second_house_average_price, second_house_grade, second_house_lift
+    second_house_average_price, second_house_grade, second_house_lift, second_house_detailsid
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -36,12 +37,14 @@
       second_house_measure, second_house_orientation, 
       second_house_region, second_house_subway, second_house_years, 
       second_house_see, second_house_total_price, second_house_average_price, 
-      second_house_grade, second_house_lift)
+      second_house_grade, second_house_lift, second_house_detailsid
+      )
     values (#{id,jdbcType=INTEGER}, #{secondHouseTitle,jdbcType=VARCHAR}, #{secondHouseHuxing,jdbcType=INTEGER}, 
       #{secondHouseMeasure,jdbcType=INTEGER}, #{secondHouseOrientation,jdbcType=CHAR}, 
       #{secondHouseRegion,jdbcType=VARCHAR}, #{secondHouseSubway,jdbcType=VARCHAR}, #{secondHouseYears,jdbcType=VARCHAR}, 
       #{secondHouseSee,jdbcType=VARCHAR}, #{secondHouseTotalPrice,jdbcType=DOUBLE}, #{secondHouseAveragePrice,jdbcType=DOUBLE}, 
-      #{secondHouseGrade,jdbcType=VARCHAR}, #{secondHouseLift,jdbcType=CHAR})
+      #{secondHouseGrade,jdbcType=VARCHAR}, #{secondHouseLift,jdbcType=CHAR}, #{secondHouseDetailsid,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.SecondHandHouse">
     insert into second_hand_house
@@ -85,6 +88,9 @@
       <if test="secondHouseLift != null">
         second_house_lift,
       </if>
+      <if test="secondHouseDetailsid != null">
+        second_house_detailsid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -125,6 +131,9 @@
       </if>
       <if test="secondHouseLift != null">
         #{secondHouseLift,jdbcType=CHAR},
+      </if>
+      <if test="secondHouseDetailsid != null">
+        #{secondHouseDetailsid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -167,6 +176,9 @@
       <if test="secondHouseLift != null">
         second_house_lift = #{secondHouseLift,jdbcType=CHAR},
       </if>
+      <if test="secondHouseDetailsid != null">
+        second_house_detailsid = #{secondHouseDetailsid,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -183,7 +195,8 @@
       second_house_total_price = #{secondHouseTotalPrice,jdbcType=DOUBLE},
       second_house_average_price = #{secondHouseAveragePrice,jdbcType=DOUBLE},
       second_house_grade = #{secondHouseGrade,jdbcType=VARCHAR},
-      second_house_lift = #{secondHouseLift,jdbcType=CHAR}
+      second_house_lift = #{secondHouseLift,jdbcType=CHAR},
+      second_house_detailsid = #{secondHouseDetailsid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

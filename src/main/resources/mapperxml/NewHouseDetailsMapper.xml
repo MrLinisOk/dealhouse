@@ -14,11 +14,13 @@
     <result column="new_details_address" jdbcType="VARCHAR" property="newDetailsAddress" />
     <result column="new_details_realestate" jdbcType="INTEGER" property="newDetailsRealestate" />
     <result column="new_details_comment" jdbcType="INTEGER" property="newDetailsComment" />
+    <result column="new_details_listid" jdbcType="INTEGER" property="newDetailsListid" />
   </resultMap>
   <sql id="Base_Column_List">
     id, new_details_name, new_details_rotationpicture, new_details_decorationsituation, 
     new_details_status, new_details_housingtype, house_type_id, new_details_averageprice, 
-    new_details_openingtime, new_details_address, new_details_realestate, new_details_comment
+    new_details_openingtime, new_details_address, new_details_realestate, new_details_comment, 
+    new_details_listid
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -35,14 +37,14 @@
       new_details_decorationsituation, new_details_status, 
       new_details_housingtype, house_type_id, new_details_averageprice, 
       new_details_openingtime, new_details_address, 
-      new_details_realestate, new_details_comment
-      )
+      new_details_realestate, new_details_comment, 
+      new_details_listid)
     values (#{id,jdbcType=INTEGER}, #{newDetailsName,jdbcType=VARCHAR}, #{newDetailsRotationpicture,jdbcType=VARCHAR}, 
       #{newDetailsDecorationsituation,jdbcType=CHAR}, #{newDetailsStatus,jdbcType=CHAR}, 
       #{newDetailsHousingtype,jdbcType=CHAR}, #{houseTypeId,jdbcType=INTEGER}, #{newDetailsAverageprice,jdbcType=DOUBLE}, 
       #{newDetailsOpeningtime,jdbcType=TIMESTAMP}, #{newDetailsAddress,jdbcType=VARCHAR}, 
-      #{newDetailsRealestate,jdbcType=INTEGER}, #{newDetailsComment,jdbcType=INTEGER}
-      )
+      #{newDetailsRealestate,jdbcType=INTEGER}, #{newDetailsComment,jdbcType=INTEGER}, 
+      #{newDetailsListid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.NewHouseDetails">
     insert into new_house_details
@@ -83,6 +85,9 @@
       <if test="newDetailsComment != null">
         new_details_comment,
       </if>
+      <if test="newDetailsListid != null">
+        new_details_listid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -120,6 +125,9 @@
       </if>
       <if test="newDetailsComment != null">
         #{newDetailsComment,jdbcType=INTEGER},
+      </if>
+      <if test="newDetailsListid != null">
+        #{newDetailsListid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -159,6 +167,9 @@
       <if test="newDetailsComment != null">
         new_details_comment = #{newDetailsComment,jdbcType=INTEGER},
       </if>
+      <if test="newDetailsListid != null">
+        new_details_listid = #{newDetailsListid,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -174,7 +185,8 @@
       new_details_openingtime = #{newDetailsOpeningtime,jdbcType=TIMESTAMP},
       new_details_address = #{newDetailsAddress,jdbcType=VARCHAR},
       new_details_realestate = #{newDetailsRealestate,jdbcType=INTEGER},
-      new_details_comment = #{newDetailsComment,jdbcType=INTEGER}
+      new_details_comment = #{newDetailsComment,jdbcType=INTEGER},
+      new_details_listid = #{newDetailsListid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
