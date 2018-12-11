@@ -1,5 +1,7 @@
 package com.hangchuang.dealhouse.pojo;
 
+import java.util.Date;
+
 public class RentingHouse {
     private Integer id;
 
@@ -26,6 +28,16 @@ public class RentingHouse {
     private String totalfloor;
 
     private String lift;
+
+    private Date createtime;
+
+    private Integer housingtypeid;
+
+    private String buildingstructure;
+
+    private String rentsys;
+
+    private String decoration;
 
     public Integer getId() {
         return id;
@@ -129,5 +141,45 @@ public class RentingHouse {
 
     public void setLift(String lift) {
         this.lift = lift == null ? null : lift.trim();
+    }
+
+    public Date getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
+    }
+
+    public Integer getHousingtypeid() {
+        return housingtypeid;
+    }
+
+    public void setHousingtypeid(Integer housingtypeid) {
+        this.housingtypeid = housingtypeid;
+    }
+
+    public String getBuildingstructure() {
+        return buildingstructure;
+    }
+
+    public void setBuildingstructure(String buildingstructure) {
+        this.buildingstructure = buildingstructure == null ? null : buildingstructure.trim();
+    }
+
+    public String getRentsys() {
+        return rentsys;
+    }
+
+    public void setRentsys(String rentsys) {
+        this.rentsys = rentsys == null ? null : rentsys.trim();
+    }
+
+    public String getDecoration() {
+        return decoration;
+    }
+
+    public void setDecoration(String decoration) {
+        this.decoration = decoration == null ? null : decoration.trim();
     }
 }

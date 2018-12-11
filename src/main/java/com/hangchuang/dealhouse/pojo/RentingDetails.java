@@ -13,15 +13,15 @@ public class RentingDetails {
 
     private Double rentingdetailsRent;
 
-    private Integer rentingdetailsApartment;
+    private String rentingdetailsApartment;
 
-    private String rentingdetailsArea;
+    private Integer rentingdetailsArea;
 
     private Date rentingdetailsReleaseTime;
 
     private String typeOfOccupancy;
 
-    private Date tenancyTime;
+    private String tenancyTime;
 
     private String houseType;
 
@@ -37,9 +37,9 @@ public class RentingDetails {
 
     private String rentingdetailsElevator;
 
-    private Integer rentingdetailsIndoorId;
+    private String rentingdetailsIndoorId;
 
-    private Integer rentingdetailsHousingld;
+    private String rentingdetailsHousingld;
 
     private Integer propertiesdetailsListHouseid;
 
@@ -83,20 +83,20 @@ public class RentingDetails {
         this.rentingdetailsRent = rentingdetailsRent;
     }
 
-    public Integer getRentingdetailsApartment() {
+    public String getRentingdetailsApartment() {
         return rentingdetailsApartment;
     }
 
-    public void setRentingdetailsApartment(Integer rentingdetailsApartment) {
-        this.rentingdetailsApartment = rentingdetailsApartment;
+    public void setRentingdetailsApartment(String rentingdetailsApartment) {
+        this.rentingdetailsApartment = rentingdetailsApartment == null ? null : rentingdetailsApartment.trim();
     }
 
-    public String getRentingdetailsArea() {
+    public Integer getRentingdetailsArea() {
         return rentingdetailsArea;
     }
 
-    public void setRentingdetailsArea(String rentingdetailsArea) {
-        this.rentingdetailsArea = rentingdetailsArea == null ? null : rentingdetailsArea.trim();
+    public void setRentingdetailsArea(Integer rentingdetailsArea) {
+        this.rentingdetailsArea = rentingdetailsArea;
     }
 
     public Date getRentingdetailsReleaseTime() {
@@ -115,12 +115,12 @@ public class RentingDetails {
         this.typeOfOccupancy = typeOfOccupancy == null ? null : typeOfOccupancy.trim();
     }
 
-    public Date getTenancyTime() {
+    public String getTenancyTime() {
         return tenancyTime;
     }
 
-    public void setTenancyTime(Date tenancyTime) {
-        this.tenancyTime = tenancyTime;
+    public void setTenancyTime(String tenancyTime) {
+        this.tenancyTime = tenancyTime == null ? null : tenancyTime.trim();
     }
 
     public String getHouseType() {
@@ -179,20 +179,20 @@ public class RentingDetails {
         this.rentingdetailsElevator = rentingdetailsElevator == null ? null : rentingdetailsElevator.trim();
     }
 
-    public Integer getRentingdetailsIndoorId() {
+    public String getRentingdetailsIndoorId() {
         return rentingdetailsIndoorId;
     }
 
-    public void setRentingdetailsIndoorId(Integer rentingdetailsIndoorId) {
-        this.rentingdetailsIndoorId = rentingdetailsIndoorId;
+    public void setRentingdetailsIndoorId(String rentingdetailsIndoorId) {
+        this.rentingdetailsIndoorId = rentingdetailsIndoorId == null ? null : rentingdetailsIndoorId.trim();
     }
 
-    public Integer getRentingdetailsHousingld() {
+    public String getRentingdetailsHousingld() {
         return rentingdetailsHousingld;
     }
 
-    public void setRentingdetailsHousingld(Integer rentingdetailsHousingld) {
-        this.rentingdetailsHousingld = rentingdetailsHousingld;
+    public void setRentingdetailsHousingld(String rentingdetailsHousingld) {
+        this.rentingdetailsHousingld = rentingdetailsHousingld == null ? null : rentingdetailsHousingld.trim();
     }
 
     public Integer getPropertiesdetailsListHouseid() {
