@@ -21,228 +21,68 @@
     <result column="rentsys" jdbcType="CHAR" property="rentsys" />
     <result column="decoration" jdbcType="CHAR" property="decoration" />
   </resultMap>
-  <sql id="Base_Column_List">
-    id, second_house_title, second_house_huxing, second_house_measure, second_house_orientation, 
-    second_house_region, advantageid, second_house_total_price, second_house_grade, country_id, 
-    floor, totalfloor, lift, createtime, housingtypeid, buildingstructure, rentsys, decoration
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from renting_house
-    where id = #{id,jdbcType=INTEGER}
+
+  <select id="dynamicQuery" parameterType="Map" resultType="com.hangchuang.dealhouse.pojo.RentingHouse">
+    select * from renting_house
+    WHERE 1=1
+    <if test="advantageid != null">
+      /*模糊查询房源优势*/
+      and advantageid LIKE #{advantageid}
+    </if>
+    <if test="housingtypeid != null">
+      /*房屋类型（住宅，公寓， 别墅， 商铺）*/
+      and housingtypeid=#{housingtypeId}
+    </if>
+    <if test="countryid != null">
+      /*房屋区域（金水， 惠济， 东区）*/
+      and country_id=#{countryId}
+    </if>
+    <if test="orientation != null">
+      /*朝向*/
+      and second_house_orientation=#{orientation}
+    </if>
+    <!--<if test="priceRangeSmall != null">
+      /*价格区间小*/
+      and #{priceRangeSmall} < second_house_total_price
+    </if>
+    <if test="priceRangeBig != null">
+      /*价格区间大*/
+      and #{priceRangeBig} > second_house_total_price
+    </if>
+    <if test="areaRangeSmall != null">
+      /*面积区间小*/
+      and #{areaRangeSmall} < second_house_measure
+    </if>-->
+    <if test="areaRangeBig != null">
+      /*面积区间大*/
+      and #{areaRangeBig} > second_house_measure
+    </if>
+    <if test="bigTime != null">
+      /*时间倒叙*/
+      ORDER BY createtime DESC
+    </if>
+    <if test="smallTime != null">
+      /*时间正序*/
+      ORDER BY createtime ASC
+    </if>
+    <if test="bigArea != null">
+      /*面积倒叙*/
+      ORDER BY second_house_measure DESC
+    </if>
+    <if test="smallArea != null">
+      /*面积正序*/
+      ORDER BY second_house_measure ASC
+    </if>
+    <if test="bigPrice != null">
+      /*价格倒叙*/
+      ORDER BY second_house_total_price DESC
+    </if>
+    <if test="smallPrice != null">
+      /*价格正序*/
+      ORDER BY second_house_total_price ASC
+    </if>
+    /*分页*/
+    LIMIT #{index}, #{count}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from renting_house
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.hangchuang.dealhouse.pojo.RentingHouse">
-    insert into renting_house (id, second_house_title, second_house_huxing, 
-      second_house_measure, second_house_orientation, 
-      second_house_region, advantageid, second_house_total_price, 
-      second_house_grade, country_id, floor, 
-      totalfloor, lift, createtime, 
-      housingtypeid, buildingstructure, rentsys, 
-      decoration)
-    values (#{id,jdbcType=INTEGER}, #{secondHouseTitle,jdbcType=VARCHAR}, #{secondHouseHuxing,jdbcType=INTEGER}, 
-      #{secondHouseMeasure,jdbcType=INTEGER}, #{secondHouseOrientation,jdbcType=CHAR}, 
-      #{secondHouseRegion,jdbcType=VARCHAR}, #{advantageid,jdbcType=VARCHAR}, #{secondHouseTotalPrice,jdbcType=DOUBLE}, 
-      #{secondHouseGrade,jdbcType=VARCHAR}, #{countryId,jdbcType=INTEGER}, #{floor,jdbcType=VARCHAR}, 
-      #{totalfloor,jdbcType=VARCHAR}, #{lift,jdbcType=CHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{housingtypeid,jdbcType=INTEGER}, #{buildingstructure,jdbcType=CHAR}, #{rentsys,jdbcType=CHAR}, 
-      #{decoration,jdbcType=CHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.RentingHouse">
-    insert into renting_house
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="secondHouseTitle != null">
-        second_house_title,
-      </if>
-      <if test="secondHouseHuxing != null">
-        second_house_huxing,
-      </if>
-      <if test="secondHouseMeasure != null">
-        second_house_measure,
-      </if>
-      <if test="secondHouseOrientation != null">
-        second_house_orientation,
-      </if>
-      <if test="secondHouseRegion != null">
-        second_house_region,
-      </if>
-      <if test="advantageid != null">
-        advantageid,
-      </if>
-      <if test="secondHouseTotalPrice != null">
-        second_house_total_price,
-      </if>
-      <if test="secondHouseGrade != null">
-        second_house_grade,
-      </if>
-      <if test="countryId != null">
-        country_id,
-      </if>
-      <if test="floor != null">
-        floor,
-      </if>
-      <if test="totalfloor != null">
-        totalfloor,
-      </if>
-      <if test="lift != null">
-        lift,
-      </if>
-      <if test="createtime != null">
-        createtime,
-      </if>
-      <if test="housingtypeid != null">
-        housingtypeid,
-      </if>
-      <if test="buildingstructure != null">
-        buildingstructure,
-      </if>
-      <if test="rentsys != null">
-        rentsys,
-      </if>
-      <if test="decoration != null">
-        decoration,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="secondHouseTitle != null">
-        #{secondHouseTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="secondHouseHuxing != null">
-        #{secondHouseHuxing,jdbcType=INTEGER},
-      </if>
-      <if test="secondHouseMeasure != null">
-        #{secondHouseMeasure,jdbcType=INTEGER},
-      </if>
-      <if test="secondHouseOrientation != null">
-        #{secondHouseOrientation,jdbcType=CHAR},
-      </if>
-      <if test="secondHouseRegion != null">
-        #{secondHouseRegion,jdbcType=VARCHAR},
-      </if>
-      <if test="advantageid != null">
-        #{advantageid,jdbcType=VARCHAR},
-      </if>
-      <if test="secondHouseTotalPrice != null">
-        #{secondHouseTotalPrice,jdbcType=DOUBLE},
-      </if>
-      <if test="secondHouseGrade != null">
-        #{secondHouseGrade,jdbcType=VARCHAR},
-      </if>
-      <if test="countryId != null">
-        #{countryId,jdbcType=INTEGER},
-      </if>
-      <if test="floor != null">
-        #{floor,jdbcType=VARCHAR},
-      </if>
-      <if test="totalfloor != null">
-        #{totalfloor,jdbcType=VARCHAR},
-      </if>
-      <if test="lift != null">
-        #{lift,jdbcType=CHAR},
-      </if>
-      <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="housingtypeid != null">
-        #{housingtypeid,jdbcType=INTEGER},
-      </if>
-      <if test="buildingstructure != null">
-        #{buildingstructure,jdbcType=CHAR},
-      </if>
-      <if test="rentsys != null">
-        #{rentsys,jdbcType=CHAR},
-      </if>
-      <if test="decoration != null">
-        #{decoration,jdbcType=CHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hangchuang.dealhouse.pojo.RentingHouse">
-    update renting_house
-    <set>
-      <if test="secondHouseTitle != null">
-        second_house_title = #{secondHouseTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="secondHouseHuxing != null">
-        second_house_huxing = #{secondHouseHuxing,jdbcType=INTEGER},
-      </if>
-      <if test="secondHouseMeasure != null">
-        second_house_measure = #{secondHouseMeasure,jdbcType=INTEGER},
-      </if>
-      <if test="secondHouseOrientation != null">
-        second_house_orientation = #{secondHouseOrientation,jdbcType=CHAR},
-      </if>
-      <if test="secondHouseRegion != null">
-        second_house_region = #{secondHouseRegion,jdbcType=VARCHAR},
-      </if>
-      <if test="advantageid != null">
-        advantageid = #{advantageid,jdbcType=VARCHAR},
-      </if>
-      <if test="secondHouseTotalPrice != null">
-        second_house_total_price = #{secondHouseTotalPrice,jdbcType=DOUBLE},
-      </if>
-      <if test="secondHouseGrade != null">
-        second_house_grade = #{secondHouseGrade,jdbcType=VARCHAR},
-      </if>
-      <if test="countryId != null">
-        country_id = #{countryId,jdbcType=INTEGER},
-      </if>
-      <if test="floor != null">
-        floor = #{floor,jdbcType=VARCHAR},
-      </if>
-      <if test="totalfloor != null">
-        totalfloor = #{totalfloor,jdbcType=VARCHAR},
-      </if>
-      <if test="lift != null">
-        lift = #{lift,jdbcType=CHAR},
-      </if>
-      <if test="createtime != null">
-        createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="housingtypeid != null">
-        housingtypeid = #{housingtypeid,jdbcType=INTEGER},
-      </if>
-      <if test="buildingstructure != null">
-        buildingstructure = #{buildingstructure,jdbcType=CHAR},
-      </if>
-      <if test="rentsys != null">
-        rentsys = #{rentsys,jdbcType=CHAR},
-      </if>
-      <if test="decoration != null">
-        decoration = #{decoration,jdbcType=CHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hangchuang.dealhouse.pojo.RentingHouse">
-    update renting_house
-    set second_house_title = #{secondHouseTitle,jdbcType=VARCHAR},
-      second_house_huxing = #{secondHouseHuxing,jdbcType=INTEGER},
-      second_house_measure = #{secondHouseMeasure,jdbcType=INTEGER},
-      second_house_orientation = #{secondHouseOrientation,jdbcType=CHAR},
-      second_house_region = #{secondHouseRegion,jdbcType=VARCHAR},
-      advantageid = #{advantageid,jdbcType=VARCHAR},
-      second_house_total_price = #{secondHouseTotalPrice,jdbcType=DOUBLE},
-      second_house_grade = #{secondHouseGrade,jdbcType=VARCHAR},
-      country_id = #{countryId,jdbcType=INTEGER},
-      floor = #{floor,jdbcType=VARCHAR},
-      totalfloor = #{totalfloor,jdbcType=VARCHAR},
-      lift = #{lift,jdbcType=CHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      housingtypeid = #{housingtypeid,jdbcType=INTEGER},
-      buildingstructure = #{buildingstructure,jdbcType=CHAR},
-      rentsys = #{rentsys,jdbcType=CHAR},
-      decoration = #{decoration,jdbcType=CHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
 </mapper>
