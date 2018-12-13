@@ -22,8 +22,8 @@
     <result column="decoration" jdbcType="CHAR" property="decoration" />
   </resultMap>
 
-  <select id="dynamicQuery" parameterType="java.util.Map" resultType="com.hangchuang.dealhouse.pojo.RentingHouse">
-    SELECT * from renting_house
+  <select id="dynamicQuery" parameterType="java.util.Map" resultType="com.hangchuang.dealhouse.utils.RentHouseSmallResult">
+    SELECT id, second_house_title as smalltitle,second_house_huxing as housetypeid,second_house_measure as measure,second_house_orientation as orientation,second_house_region as region,advantageid,second_house_total_price as price,second_house_grade as grade from renting_house
     where 1=1
       /*房源优势id 数组*/
       <foreach collection="advantageIds" item="advantageId" separator=" ">

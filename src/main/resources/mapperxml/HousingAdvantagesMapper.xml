@@ -14,5 +14,14 @@
     <if test="advantageName != null">
       where housing_advantages_name = #{advantageName};
     </if>
+
+  </select>
+
+  <select id="selectAdvantageById" parameterType="String" resultType="com.hangchuang.dealhouse.pojo.HousingAdvantages">
+    SELECT * from housing_advantages
+    <if test="id != null">
+      where id=#{id}
+    </if>
+
   </select>
 </mapper>

@@ -11,4 +11,6 @@ public interface HousingAdvantagesMapper {
     List<HousingAdvantages> selectAllAdvantage();
 
     HousingAdvantages selectAdvantageByName(@Param("advantageName") String advantageName);
+
+    HousingAdvantages selectAdvantageById(@Param("id") String id);
 }

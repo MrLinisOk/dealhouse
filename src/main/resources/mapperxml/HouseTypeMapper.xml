@@ -12,4 +12,11 @@
       WHERE type=#{houseTypeName}
     </if>
   </select>
+
+  <select id="selectHouseTypeById" parameterType="int" resultType="com.hangchuang.dealhouse.pojo.HouseType">
+    select * from house_type
+    <if test=" id != null">
+      WHERE id=#{id}
+    </if>
+  </select>
 </mapper>

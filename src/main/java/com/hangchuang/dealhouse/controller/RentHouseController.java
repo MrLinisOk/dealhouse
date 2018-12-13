@@ -6,6 +6,7 @@ import com.hangchuang.dealhouse.pojo.HousingType;
 import com.hangchuang.dealhouse.pojo.RentingHouse;
 import com.hangchuang.dealhouse.sevice.RentHouseService;
 import com.hangchuang.dealhouse.utils.RentHouseParameter;
+import com.hangchuang.dealhouse.utils.RentHouseSmallResult;
 import com.hangchuang.dealhouse.utils.Result;
 import com.hangchuang.dealhouse.vo.SearchConditionVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class RentHouseController {
 
         try {
             //renthouse.getCountryId(), renthouse.getPriceSort(), renthouse.getAcreageSort(), renthouse.getHousetype(), renthouse.getArealist(), renthouse.getOrientation(), renthouse.getDecoration(), renthouse.getLift(), renthouse.getUse(), renthouse.getStructure(), renthouse.getFloor(), renthouse.getRentsys(), renthouse.getAdvantage(), renthouse.getPriceRange()
-            List<RentingHouse> list = rentHouseService.dynamicQuery1(countryId, sort, housetype, arealist, orientation, decoration, lift, housingtypeid, structure, floor, rentsys, advantage, priceRange, index, count);
+            List<RentHouseSmallResult> list = rentHouseService.dynamicQuery1(countryId, sort, housetype, arealist, orientation, decoration, lift, housingtypeid, structure, floor, rentsys, advantage, priceRange, index, count);
             R.setStatus(1);
             R.setData(list);
         } catch (Exception e) {

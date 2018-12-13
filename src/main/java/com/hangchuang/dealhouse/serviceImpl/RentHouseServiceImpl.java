@@ -3,6 +3,7 @@ package com.hangchuang.dealhouse.serviceImpl;
 import com.hangchuang.dealhouse.mapper.*;
 import com.hangchuang.dealhouse.pojo.*;
 import com.hangchuang.dealhouse.sevice.RentHouseService;
+import com.hangchuang.dealhouse.utils.RentHouseSmallResult;
 import com.hangchuang.dealhouse.vo.SearchConditionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -213,7 +214,7 @@ public class RentHouseServiceImpl implements RentHouseService{
 
     @Override
     @Transactional(propagation = Propagation.NOT_SUPPORTED)
-    public List<RentingHouse> dynamicQuery1(int countryId, String sort, String[] housetype, String[] arealist, String[] orientation, String[] decoration, String[] lift, int[] housingtypeid, String[] structure, String[] floor, String[] rentsys, String[] advantage, String[] priceRange, int index, int count) {
+    public List<RentHouseSmallResult> dynamicQuery1(int countryId, String sort, String[] housetype, String[] arealist, String[] orientation, String[] decoration, String[] lift, int[] housingtypeid, String[] structure, String[] floor, String[] rentsys, String[] advantage, String[] priceRange, int index, int count) {
         //这个map传参给mapper
         Map<String, Object> map = new HashMap<>();
 
@@ -429,7 +430,32 @@ public class RentHouseServiceImpl implements RentHouseService{
         }
 
         System.out.println("housetypes");
-        List<RentingHouse> list = rentingHouseMapper.dynamicQuery(map);
+        List<RentHouseSmallResult> list = rentingHouseMapper.dynamicQuery(map);
+
+        //拿出来这个list之后， 优势和户型（一室，二室）都是id 过滤一遍，都化成名字
+        for (RentHouseSmallResult rhs: list) {
+            String advantageids = rhs.getAdvantageid();
+            //如果没有优势，直接跳出
+            if (advantageids == null || advantageids.equals("")){
+                break;
+            }
+            //切割字符串  (1,2,3,4)
+            String[] split = advantageids.split(",");
+            //遍历这个数组，取出每一个id 在吧他们的名字存起来
+            String[] names = new String[split.length];
+            for (int i = 0; i < split.length; i++) {
+                HousingAdvantages advantage1 = housingAdvantagesMapper.selectAdvantageById(split[i]);
+                names[i] = advantage1.getHousingAdvantagesName();
+                //现在这个names数组就是要返回给前端的所有优势
+            }
+            rhs.setAdvantagename(names);
+
+
+            int housetypeid = rhs.getHousetypeid();
+            //根据housetypeid 得到名字
+            HouseType houseType = houseTypeMapper.selectHouseTypeById(housetypeid);
+            rhs.setHousetypename(houseType.getType());
+        }
         return list;
     }
 }
