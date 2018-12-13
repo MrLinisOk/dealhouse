@@ -1,22 +1,23 @@
 package com.hangchuang.dealhouse.serviceImpl;
 
-import com.hangchuang.dealhouse.mapper.AreaMapper;
-import com.hangchuang.dealhouse.mapper.CountryMapper;
-import com.hangchuang.dealhouse.mapper.RentingHouseMapper;
-import com.hangchuang.dealhouse.pojo.Area;
-import com.hangchuang.dealhouse.pojo.Country;
-import com.hangchuang.dealhouse.pojo.RentingHouse;
+import com.hangchuang.dealhouse.mapper.*;
+import com.hangchuang.dealhouse.pojo.*;
 import com.hangchuang.dealhouse.sevice.RentHouseService;
+import com.hangchuang.dealhouse.utils.RentHouseSmallResult;
 import com.hangchuang.dealhouse.vo.SearchConditionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
+
 public class RentHouseServiceImpl implements RentHouseService{
 
     @Autowired
@@ -28,29 +29,12 @@ public class RentHouseServiceImpl implements RentHouseService{
     @Autowired
     private CountryMapper countryMapper;
 
-    @Override
-    public List<RentingHouse> dynamicQuery(int bigTime, int smallTime, int bigArea, int smallArea, int bigPrice, int smallPrice, int houseingTypeId, int featureId, int countryId, double priceRangeSmall, double priceRangeBig, int areaRangeSmall, int areaRangeBig, String orientation, String floor, String lift, int index, int count) {
-        List<RentingHouse> list = new ArrayList<>();
-        Map<String, Object> map =  new HashMap<>();
-        //bigTime, smallTime, bigArea, smallArea, bigPrice, smallPrice, houseingTypeId, featureId, countryId, priceRangeSmall, priceRangeBig, areaRangeSmall, areaRangeBig, orientation, floor, lift, index, count
+    @Autowired
+    private HousingAdvantagesMapper housingAdvantagesMapper;
 
-        map.put("bigTime", bigTime);
-        map.put("smallTime",smallTime);
-        map.put("bigArea", bigArea);
-        map.put("smallArea", smallArea);
-        map.put("bigPrice", bigPrice);
-        map.put("smallPrice", smallPrice);
-        map.put("houseingTypeId", houseingTypeId);
-        map.put("featureId", featureId);
-        map.put("countryId", countryId);
-        map.put("priceRangeSmall",priceRangeSmall);
-        map.put("priceRangeBig",priceRangeBig);
-        map.put("areaRangeSmall",areaRangeSmall);
-        map.put("areaRangeBig",areaRangeBig);
-        map.put("orientation",orientation);
-        //map.put("")
-        return list;
-    }
+    @Autowired
+    private HouseTypeMapper houseTypeMapper;
+
 
     @Override
     public List<SearchConditionVo> searchCondition(String country) {
@@ -58,6 +42,14 @@ public class RentHouseServiceImpl implements RentHouseService{
         List<SearchConditionVo> list = new ArrayList<>();
 
         Area area = areaMapper.selectAreaByShorName(country);
+        //如果区域不存在直接返回不存在
+        if (area == null){
+            SearchConditionVo searchConditionVo = new SearchConditionVo();
+            searchConditionVo.setTitle("区域");
+            searchConditionVo.setContent("不存在");
+            list.add(searchConditionVo);
+            return list;
+        }
         Integer id = area.getId();
         List<Country> countries = countryMapper.selectCountryByPid(id);
         //所有区域放进vo中
@@ -148,18 +140,6 @@ public class RentHouseServiceImpl implements RentHouseService{
         s8.setContent(listS8);
         list1.add(s8);
 
-        SearchConditionVo s9 = new SearchConditionVo();
-        s9.setTitle("楼龄");
-        List<String> listS9 = new ArrayList<>();
-        listS9.add("2年以下");
-        listS9.add("2-5年");
-        listS9.add("5-10年");
-        listS9.add("10-15年");
-        listS9.add("15-20年");
-        listS9.add("20年以上");
-        s9.setContent(listS9);
-        list1.add(s9);
-
         SearchConditionVo s10 = new SearchConditionVo();
         s10.setTitle("用途");
         List<String> listS10 = new ArrayList<>();
@@ -204,16 +184,278 @@ public class RentHouseServiceImpl implements RentHouseService{
         SearchConditionVo s14 = new SearchConditionVo();
         s14.setTitle("标签");
         List<String> listS14 = new ArrayList<>();
-        listS14.add("领包入住");
-        listS14.add("带家私");
-        listS14.add("带家电");
-        listS14.add("可上网");
-        listS14.add("近地铁");
+        List<HousingAdvantages> housingAdvantages = housingAdvantagesMapper.selectAllAdvantage();
+        for (HousingAdvantages h: housingAdvantages) {
+            String housingAdvantagesName = h.getHousingAdvantagesName();
+            //吧这些优势全部放进去
+            listS14.add(housingAdvantagesName);
+        }
         s14.setContent(listS14);
         list1.add(s14);
 
         s4.setContent(list1);
+
         list.add(s4);
+
+        SearchConditionVo s15 = new SearchConditionVo();
+        s15.setTitle("排序");
+        List<String> l15 = new ArrayList<>();
+        l15.add("综合排序");
+        l15.add("租金由低到高");
+        l15.add("租金由高到底");
+        l15.add("面积由小到大");
+        l15.add("面积由大到小");
+
+        s15.setContent(l15);
+
+        list.add(s15);
+        return list;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.NOT_SUPPORTED)
+    public List<RentHouseSmallResult> dynamicQuery1(int countryId, String sort, String[] housetype, String[] arealist, String[] orientation, String[] decoration, String[] lift, int[] housingtypeid, String[] structure, String[] floor, String[] rentsys, String[] advantage, String[] priceRange, int index, int count) {
+        //这个map传参给mapper
+        Map<String, Object> map = new HashMap<>();
+
+        //房源优势id 需要一个数组里面放id s
+
+        map.put("index", index);
+        map.put("count", count);
+        String[] advantageIds = new String[advantage.length];
+
+        for (int i = 0; i < advantage.length; i++) {
+            String s = advantage[i];
+            //拿出来这个优势名s  根据这个优势名查询这个优势在表中的id
+            HousingAdvantages h = housingAdvantagesMapper.selectAdvantageByName(s);
+            //得到优势id
+            Integer id = h.getId();
+            //放入数组中
+            System.out.println("房屋优势id++++++++++++++++++" + id);
+            advantageIds[i] = "%"+id+"%";
+        }
+        map.put("advantageIds", advantageIds);
+        //房源优势放入完成
+
+        //户型开始
+        System.out.println("户型housetype+++++++++++++++++++" + housetype.length);
+
+        int[] houseTypes = new int[housetype.length];
+        for (int i = 0; i < housetype.length; i++) {
+            String  s = housetype[i];
+            //根据户型名查询户型id 一室 二室 三室
+            HouseType h = houseTypeMapper.selectHouseTypeByName(s);
+            Integer id = h.getId();
+            houseTypes[i] = id;
+        }
+        map.put("housetypes", houseTypes);
+        //户型结束
+
+        //朝向
+        System.out.println("朝向orientation++++++++++++++++++++++" + orientation.length);
+        map.put("orientation", orientation);
+        //朝向结束
+
+        //装饰
+        System.out.println("装饰decoration"+decoration.length);
+        map.put("decoration",decoration);
+        //装饰结束
+
+        //电梯
+        System.out.println("电梯lift++++++++++++++++++++++"+lift.length);
+        map.put("lift", lift);
+        //电梯结束hu
+
+        //房屋类型
+        System.out.println("房屋类型housingtypeid+++++++++++++++++++++++++" + housingtypeid.length);
+
+        map.put("housingtypeid", housingtypeid);
+        //房屋类型结束
+
+        //结构
+        System.out.println("结构buildingstructure_+++++++++++++++++++++++" + structure.length);
+        map.put("buildingstructure", structure);
+        //结构结束
+
+        //楼层 floor  String[]
+        for (String f: floor) {
+            if (f.equals("低楼层")){
+                System.out.println("我是低楼层");
+                map.put("low", 1);
+                continue;
+            }
+            if (f.equals("中楼层")){
+                System.out.println("我是中楼层");
+                map.put("middle", 1);
+                continue;
+            }
+            if (f.equals("高楼层")){
+                System.out.println("我是高楼层");
+                map.put("high", 1);
+                continue;
+            }
+        }
+        //楼层结束
+
+        //租房方式
+        System.out.println("租房方式++++++++++++++++++++++++++" + rentsys.length);
+        map.put("rentsys", rentsys);
+        //租房方式结束
+
+        //区域id
+        System.out.println("区域id+++++++++++++++++++++++"+countryId);
+        map.put("countryId", countryId);
+        //区域结束
+
+        //价钱区间
+        for (String p: priceRange) {
+            //获取每一个价钱 p
+            if (p.equals("500元以下")){
+                System.out.println("价钱。。。。。500.......................");
+                map.put("fiveLowPrice", 1);
+                continue;
+            }
+            if (p.equals("500-800元")){
+                System.out.println("5-8..................");
+                map.put("fiveEightPrice", 1);
+                continue;
+            }
+            if (p.equals("800-1200元")){
+                System.out.println("8-12...................");
+                map.put("eightTwelvePrice", 1);
+                continue;
+            }
+            if (p.equals("1200-1500元")){
+                System.out.println("12-15.................");
+                map.put("twelveFifteenPrice", 1);
+                continue;
+            }
+            if (p.equals("1500-2000元")){
+                System.out.println("15-20..................");
+                map.put("fifteenTwentyPrice", 1);
+                continue;
+            }
+            if (p.equals("2000-3000元")){
+                System.out.println("20-30..................");
+                map.put("twentyThirtyPrice", 1);
+                continue;
+            }
+            if (p.equals("3000-5000元")){
+                System.out.println("30-50.................");
+                map.put("thirtyFiftyPrice", 1);
+                continue;
+            }
+            if (p.equals("5000元以上")){
+                System.out.println("50+++++++++++..................");
+                map.put("fiftyHighPrice", 1);
+                continue;
+            }
+        }
+        //价格区间结束
+
+        //面积区间
+        for (String a:arealist) {
+            if (a.equals("30以下")){
+                System.out.println("面积30-------...............");
+                map.put("threeLowAcreage",1);
+                continue;
+            }
+            if (a.equals("30-50")){
+                System.out.println("30-50.....................");
+                map.put("threeFiveAcreage",1);
+                continue;
+            }
+            if (a.equals("50-80")){
+                System.out.println("50-80........................");
+                map.put("fiveEightAcreage",1);
+                continue;
+            }
+            if (a.equals("80-100")){
+                System.out.println("80-100..................");
+                map.put("eightTenAcreage",1);
+                continue;
+            }
+            if (a.equals("100-120")){
+                System.out.println("100-120.....................");
+                map.put("tenTwelveAcreage",1);
+                continue;
+            }
+
+            if (a.equals("120-150")){
+                System.out.println("12-15");
+                map.put("twelveFifteenAcreage",1);
+                continue;
+            }
+            if (a.equals("150-200")){
+                System.out.println("15-20");
+                map.put("fifteenTwentyAcreage",1);
+                continue;
+            }
+            if (a.equals("200以上")){
+                System.out.println("20+++++++");
+                map.put("fifteenTwentyAcreage",1);
+                continue;
+            }
+
+        }
+        //面积结束
+
+        //花式排序， 价格正序、倒叙 面积正序，倒叙             String priceSort, //价格排序
+        //                                              String acreageSort,//面积排序
+        /*l15.add("综合排序");
+        l15.add("租金由低到高");
+        l15.add("租金由高到底");
+        l15.add("面积由小到大");
+        l15.add("面积由大到小");*/
+
+        if(sort.equals("租金由低到高")){
+            System.out.println("租金由低到高");
+            map.put("sname", "second_house_total_price");
+            map.put("sort", "ASC");
+        }
+        if(sort.equals("租金由高到底")){
+            System.out.println("租金由高到底");
+            map.put("sname", "second_house_total_price");
+            map.put("sort", "DESC");
+        }
+        if(sort.equals("面积由小到大")){
+            System.out.println("面积由小到大");
+            map.put("sname", "second_house_measure");
+            map.put("sort", "ASC");
+        }
+        if(sort.equals("面积由大到小")){
+            System.out.println("面积由大到小");
+            map.put("sname", "second_house_measure");
+            map.put("sort", "DESC");
+        }
+
+        System.out.println("housetypes");
+        List<RentHouseSmallResult> list = rentingHouseMapper.dynamicQuery(map);
+
+        //拿出来这个list之后， 优势和户型（一室，二室）都是id 过滤一遍，都化成名字
+        for (RentHouseSmallResult rhs: list) {
+            String advantageids = rhs.getAdvantageid();
+            //如果没有优势，直接跳出
+            if (advantageids == null || advantageids.equals("")){
+                break;
+            }
+            //切割字符串  (1,2,3,4)
+            String[] split = advantageids.split(",");
+            //遍历这个数组，取出每一个id 在吧他们的名字存起来
+            String[] names = new String[split.length];
+            for (int i = 0; i < split.length; i++) {
+                HousingAdvantages advantage1 = housingAdvantagesMapper.selectAdvantageById(split[i]);
+                names[i] = advantage1.getHousingAdvantagesName();
+                //现在这个names数组就是要返回给前端的所有优势
+            }
+            rhs.setAdvantagename(names);
+
+
+            int housetypeid = rhs.getHousetypeid();
+            //根据housetypeid 得到名字
+            HouseType houseType = houseTypeMapper.selectHouseTypeById(housetypeid);
+            rhs.setHousetypename(houseType.getType());
+        }
         return list;
     }
 }

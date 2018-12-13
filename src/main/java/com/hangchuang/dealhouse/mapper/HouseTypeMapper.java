@@ -1,17 +1,11 @@
 package com.hangchuang.dealhouse.mapper;
 
 import com.hangchuang.dealhouse.pojo.HouseType;
+import org.apache.ibatis.annotations.Param;
 
 public interface HouseTypeMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(HouseType record);
+    HouseType selectHouseTypeByName(@Param("houseTypeName") String houseTypeName);
 
-    int insertSelective(HouseType record);
-
-    HouseType selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(HouseType record);
-
-    int updateByPrimaryKey(HouseType record);
+    HouseType selectHouseTypeById(@Param("id") int id);
 }

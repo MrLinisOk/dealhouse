@@ -5,54 +5,23 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="housing_advantages_name" jdbcType="VARCHAR" property="housingAdvantagesName" />
   </resultMap>
-  <sql id="Base_Column_List">
-    id, housing_advantages_name
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from housing_advantages
-    where id = #{id,jdbcType=INTEGER}
+  <select id="selectAllAdvantage" resultType="com.hangchuang.dealhouse.pojo.HousingAdvantages">
+    SELECT * from housing_advantages
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from housing_advantages
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.hangchuang.dealhouse.pojo.HousingAdvantages">
-    insert into housing_advantages (id, housing_advantages_name)
-    values (#{id,jdbcType=INTEGER}, #{housingAdvantagesName,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.HousingAdvantages">
-    insert into housing_advantages
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="housingAdvantagesName != null">
-        housing_advantages_name,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="housingAdvantagesName != null">
-        #{housingAdvantagesName,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hangchuang.dealhouse.pojo.HousingAdvantages">
-    update housing_advantages
-    <set>
-      <if test="housingAdvantagesName != null">
-        housing_advantages_name = #{housingAdvantagesName,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hangchuang.dealhouse.pojo.HousingAdvantages">
-    update housing_advantages
-    set housing_advantages_name = #{housingAdvantagesName,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+  
+  <select id="selectAdvantageByName" parameterType="String" resultType="com.hangchuang.dealhouse.pojo.HousingAdvantages">
+    select * from housing_advantages
+    <if test="advantageName != null">
+      where housing_advantages_name = #{advantageName};
+    </if>
+
+  </select>
+
+  <select id="selectAdvantageById" parameterType="String" resultType="com.hangchuang.dealhouse.pojo.HousingAdvantages">
+    SELECT * from housing_advantages
+    <if test="id != null">
+      where id=#{id}
+    </if>
+
+  </select>
 </mapper>

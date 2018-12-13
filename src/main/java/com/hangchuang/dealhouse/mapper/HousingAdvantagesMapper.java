@@ -1,17 +1,16 @@
 package com.hangchuang.dealhouse.mapper;
 
 import com.hangchuang.dealhouse.pojo.HousingAdvantages;
+import org.apache.ibatis.annotations.Param;
+import org.hibernate.validator.constraints.EAN;
+
+import java.util.List;
 
 public interface HousingAdvantagesMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(HousingAdvantages record);
+    List<HousingAdvantages> selectAllAdvantage();
 
-    int insertSelective(HousingAdvantages record);
+    HousingAdvantages selectAdvantageByName(@Param("advantageName") String advantageName);
 
-    HousingAdvantages selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(HousingAdvantages record);
-
-    int updateByPrimaryKey(HousingAdvantages record);
+    HousingAdvantages selectAdvantageById(@Param("id") String id);
 }
