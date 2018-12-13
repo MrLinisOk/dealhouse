@@ -28,5 +28,4 @@ public interface RentHouseService {
                                                     int count//一页多少个
     );
 
-    public List<SearchConditionVo> searchCondition(String country);
 }
