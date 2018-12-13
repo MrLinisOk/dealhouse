@@ -22,67 +22,143 @@
     <result column="decoration" jdbcType="CHAR" property="decoration" />
   </resultMap>
 
-  <select id="dynamicQuery" parameterType="Map" resultType="com.hangchuang.dealhouse.pojo.RentingHouse">
-    select * from renting_house
-    WHERE 1=1
-    <if test="advantageid != null">
-      /*模糊查询房源优势*/
-      and advantageid LIKE #{advantageid}
-    </if>
-    <if test="housingtypeid != null">
-      /*房屋类型（住宅，公寓， 别墅， 商铺）*/
-      and housingtypeid=#{housingtypeId}
-    </if>
-    <if test="countryid != null">
-      /*房屋区域（金水， 惠济， 东区）*/
-      and country_id=#{countryId}
-    </if>
-    <if test="orientation != null">
-      /*朝向*/
-      and second_house_orientation=#{orientation}
-    </if>
-    <!--<if test="priceRangeSmall != null">
-      /*价格区间小*/
-      and #{priceRangeSmall} < second_house_total_price
-    </if>
-    <if test="priceRangeBig != null">
-      /*价格区间大*/
-      and #{priceRangeBig} > second_house_total_price
-    </if>
-    <if test="areaRangeSmall != null">
-      /*面积区间小*/
-      and #{areaRangeSmall} < second_house_measure
-    </if>-->
-    <if test="areaRangeBig != null">
-      /*面积区间大*/
-      and #{areaRangeBig} > second_house_measure
-    </if>
-    <if test="bigTime != null">
-      /*时间倒叙*/
-      ORDER BY createtime DESC
-    </if>
-    <if test="smallTime != null">
-      /*时间正序*/
-      ORDER BY createtime ASC
-    </if>
-    <if test="bigArea != null">
-      /*面积倒叙*/
-      ORDER BY second_house_measure DESC
-    </if>
-    <if test="smallArea != null">
-      /*面积正序*/
-      ORDER BY second_house_measure ASC
-    </if>
-    <if test="bigPrice != null">
-      /*价格倒叙*/
-      ORDER BY second_house_total_price DESC
-    </if>
-    <if test="smallPrice != null">
-      /*价格正序*/
-      ORDER BY second_house_total_price ASC
-    </if>
-    /*分页*/
-    LIMIT #{index}, #{count}
-  </select>
+  <select id="dynamicQuery" parameterType="java.util.Map" resultType="com.hangchuang.dealhouse.pojo.RentingHouse">
+    SELECT * from renting_house
+    where 1=1
+      /*房源优势id 数组*/
+      <foreach collection="advantageIds" item="advantageId" separator=" ">
+          and advantageid like #{advantageId}
+      </foreach>
+      /*户型 一室 二室 三室~~~~~  list数组*/
+      <foreach collection="housetypes" item="housetype" index="index" open="and second_house_huxing in (" close=")" separator=",">
+          #{housetype}
+      </foreach>
 
+           /*('东','西','南','北')*/
+          <foreach collection="orientation" item="orientation" index="index" open="and second_house_orientation in (" close=")" separator=",">
+            #{orientation}
+          </foreach>
+                /*装饰， 精装， 普装， 豪装， 毛坯*/
+                  <foreach collection="decoration" item="decoration" index="index" open="and decoration in (" close=")" separator=",">
+                      #{decoration}
+                  </foreach>
+                  /*有无电梯  有 / 无*/
+                  <foreach collection="lift" item="lift" index="index" open="and lift in (" close=")" separator=",">
+                      #{lift}
+                  </foreach>
+      /*房屋类型，住宅，公寓，写字楼， 这个传id*/
+<foreach collection="housingtypeid" item="housingtypeid" index="index" open="and housingtypeid in (" close=")" separator=",">
+#{housingtypeid}
+</foreach>
+      /*结构，开间， 平层， 跃式， 复式*/
+      <foreach collection="buildingstructure" item="buildingstructure" index="index" open="and buildingstructure in (" close=")" separator=",">
+      #{buildingstructure}
+      </foreach>
+      /*楼层 传选项 low  middle  high*/
+      <if test="low != null">
+      and 0 &lt; floor &lt; 3
+      </if>
+      <if test="middle != null">
+      and 4 &lt; floor &lt; 9
+      </if>
+      <if test="high != null">
+      and 10 &lt; floor
+      </if>
+      /*租房类型  整租，合租~~~    String[] rentsys = new String[2]  ["整租", "合租"]       and rentsys in ('整租','合租')*/
+      <foreach collection="rentsys" item="type" index="index" open="and rentsys in (" close=")" separator=",">
+      #{type}
+      </foreach>
+
+      /*城市区域id，二七区？金水区？*/
+      <if test="countryId != null">
+      and country_id = #{countryId}
+      </if>
+      /*价钱 ~~~~~ 自选项*/
+      <if test="fiveLowPrice != null">
+      AND 0 &lt; second_house_total_price &lt; 500
+      </if>
+      <if test="fiveEightPrice != null">
+      AND 500 &lt; second_house_total_price &lt; 800
+      </if>
+      <if test="eightTwelvePrice != null">
+      AND 800 &lt; second_house_total_price &lt; 1200
+      </if>
+      <if test="twelveFifteenPrice != null">
+      AND 1200 &lt; second_house_total_price &lt; 1500
+      </if>
+      <if test="fifteenTwentyPrice != null">
+      AND 1500 &lt; second_house_total_price &lt; 2000
+      </if>
+      <if test="twentyThirtyPrice != null">
+      AND 2000 &lt; second_house_total_price &lt; 3000
+      </if>
+      <if test="thirtyFiftyPrice != null">
+      AND 3000 &lt; second_house_total_price &lt; 5000
+      </if>
+      <if test="fiftyHighPrice != null">
+      AND 5000 &lt; second_house_total_price
+      </if>
+      /*面积自选项~~~~~~~~~~~~~*/
+      <if test="threeLowAcreage != null">
+      AND 0 &lt; second_house_measure &lt; 30
+      </if>
+      <if test="threeFiveAcreage != null">
+      AND 30 &lt; second_house_measure &lt; 50
+      </if>
+      <if test="fiveEightAcreage != null">
+      AND 50 &lt; second_house_measure &lt; 80
+      </if>
+      <if test="eightTenAcreage != null">
+      AND 80 &lt; second_house_measure &lt; 100
+      </if>
+      <if test="tenTwelveAcreage != null">
+      AND 100 &lt; second_house_measure &lt; 120
+      </if>
+      <if test="twelveFifteenAcreage != null">
+      AND 120 &lt; second_house_measure &lt; 150
+      </if>
+      <if test="fifteenTwentyAcreage != null">
+      AND 150 &lt; second_house_measure &lt; 200
+      </if>
+      <if test="fifteenTwentyAcreage != null">
+      AND 200 &lt; second_house_measure
+      </if>
+
+      /*花式排序*/
+      <if test="sname != null">
+      ORDER BY ${sname}
+      </if>
+      <if test="sname != null">
+      ${sort}
+      </if>
+      limit #{index}, #{count}
+/*collection ：collection属性的值有三个分别是list、array、map三种，分别对应的参数类型为：List、数组、map集合，我在上面传的参数为数组，所以值为array
+
+    　　　　item ： 表示在迭代过程中每一个元素的别名
+
+    　　　　index ：表示在迭代过程中每次迭代到的位置（下标）
+
+    　　　　open ：前缀
+
+    　　　　close ：后缀
+
+    　　　　separator ：分隔符，表示迭代时每个元素之间以什么分隔*/
+    /*SELECT * from renting_house
+    where 1=1
+    and advantageid like '%1%'
+    and advantageid like '%4%'
+    and second_house_huxing='1'
+    and second_house_orientation in ('东','西','南','北')
+    and decoration in ('普装', '精装', '豪装', '毛坯')
+    and lift in ('有', '无')
+    and housingtypeid in ('1', '2')
+    and buildingstructure in ('开间', '平层', '跃层', '复式')
+    and 0 &lt; floor &lt; 3
+    and 4 &lt; floor &lt; 9
+    and rentsys in ('整租', '合租')
+    and country_id='6'
+    and 0 &lt; second_house_total_price &lt; 4000
+    and 0 &lt; second_house_measure &lt; 30
+    ORDER BY createtime DESC*/
+  </select>
 </mapper>
