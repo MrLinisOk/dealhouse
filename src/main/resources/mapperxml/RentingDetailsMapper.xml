@@ -7,7 +7,7 @@
     <result column="rentingdetails_rotation_picture" jdbcType="VARCHAR" property="rentingdetailsRotationPicture" />
     <result column="rentingdetails_andress" jdbcType="VARCHAR" property="rentingdetailsAndress" />
     <result column="rentingdetails_rent" jdbcType="DOUBLE" property="rentingdetailsRent" />
-    <result column="rentingdetails_apartment" jdbcType="VARCHAR" property="rentingdetailsApartment" />
+    <result column="rentingdetails_apartment" jdbcType="INTEGER" property="rentingdetailsApartment" />
     <result column="rentingdetails_area" jdbcType="INTEGER" property="rentingdetailsArea" />
     <result column="rentingdetails_release_time" jdbcType="TIMESTAMP" property="rentingdetailsReleaseTime" />
     <result column="type_of_occupancy" jdbcType="VARCHAR" property="typeOfOccupancy" />
@@ -24,14 +24,14 @@
     <result column="propertiesdetails_list_houseId" jdbcType="INTEGER" property="propertiesdetailsListHouseid" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, rentingdetails_name, rentingdetails_rotation_picture, rentingdetails_andress, 
-    rentingdetails_rent, rentingdetails_apartment, rentingdetails_area, rentingdetails_release_time, 
-    type_of_occupancy, tenancy_time, house_type, rentingdetails_floor, rebtingdetails_water, 
-    rentingdetails_electricity, rentingdetails_gas, rentingdetails_heating, rentingdetails_elevator, 
+    id, rentingdetails_name, rentingdetails_rotation_picture, rentingdetails_andress,
+    rentingdetails_rent, rentingdetails_apartment, rentingdetails_area, rentingdetails_release_time,
+    type_of_occupancy, tenancy_time, house_type, rentingdetails_floor, rebtingdetails_water,
+    rentingdetails_electricity, rentingdetails_gas, rentingdetails_heating, rentingdetails_elevator,
     rentingdetails_indoor_id, rentingdetails_housingld, propertiesdetails_list_houseId
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from rentingdetails
     where id = #{id,jdbcType=INTEGER}
@@ -41,23 +41,23 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hangchuang.dealhouse.pojo.RentingDetails">
-    insert into rentingdetails (id, rentingdetails_name, rentingdetails_rotation_picture, 
-      rentingdetails_andress, rentingdetails_rent, 
-      rentingdetails_apartment, rentingdetails_area, 
-      rentingdetails_release_time, type_of_occupancy, 
-      tenancy_time, house_type, rentingdetails_floor, 
-      rebtingdetails_water, rentingdetails_electricity, 
-      rentingdetails_gas, rentingdetails_heating, rentingdetails_elevator, 
-      rentingdetails_indoor_id, rentingdetails_housingld, 
+    insert into rentingdetails (id, rentingdetails_name, rentingdetails_rotation_picture,
+      rentingdetails_andress, rentingdetails_rent,
+      rentingdetails_apartment, rentingdetails_area,
+      rentingdetails_release_time, type_of_occupancy,
+      tenancy_time, house_type, rentingdetails_floor,
+      rebtingdetails_water, rentingdetails_electricity,
+      rentingdetails_gas, rentingdetails_heating, rentingdetails_elevator,
+      rentingdetails_indoor_id, rentingdetails_housingld,
       propertiesdetails_list_houseId)
-    values (#{id,jdbcType=INTEGER}, #{rentingdetailsName,jdbcType=VARCHAR}, #{rentingdetailsRotationPicture,jdbcType=VARCHAR}, 
-      #{rentingdetailsAndress,jdbcType=VARCHAR}, #{rentingdetailsRent,jdbcType=DOUBLE}, 
-      #{rentingdetailsApartment,jdbcType=VARCHAR}, #{rentingdetailsArea,jdbcType=INTEGER}, 
-      #{rentingdetailsReleaseTime,jdbcType=TIMESTAMP}, #{typeOfOccupancy,jdbcType=VARCHAR}, 
-      #{tenancyTime,jdbcType=VARCHAR}, #{houseType,jdbcType=VARCHAR}, #{rentingdetailsFloor,jdbcType=INTEGER}, 
-      #{rebtingdetailsWater,jdbcType=VARCHAR}, #{rentingdetailsElectricity,jdbcType=VARCHAR}, 
-      #{rentingdetailsGas,jdbcType=CHAR}, #{rentingdetailsHeating,jdbcType=CHAR}, #{rentingdetailsElevator,jdbcType=CHAR}, 
-      #{rentingdetailsIndoorId,jdbcType=VARCHAR}, #{rentingdetailsHousingld,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{rentingdetailsName,jdbcType=VARCHAR}, #{rentingdetailsRotationPicture,jdbcType=VARCHAR},
+      #{rentingdetailsAndress,jdbcType=VARCHAR}, #{rentingdetailsRent,jdbcType=DOUBLE},
+      #{rentingdetailsApartment,jdbcType=VARCHAR}, #{rentingdetailsArea,jdbcType=INTEGER},
+      #{rentingdetailsReleaseTime,jdbcType=TIMESTAMP}, #{typeOfOccupancy,jdbcType=VARCHAR},
+      #{tenancyTime,jdbcType=VARCHAR}, #{houseType,jdbcType=VARCHAR}, #{rentingdetailsFloor,jdbcType=INTEGER},
+      #{rebtingdetailsWater,jdbcType=VARCHAR}, #{rentingdetailsElectricity,jdbcType=VARCHAR},
+      #{rentingdetailsGas,jdbcType=CHAR}, #{rentingdetailsHeating,jdbcType=CHAR}, #{rentingdetailsElevator,jdbcType=CHAR},
+      #{rentingdetailsIndoorId,jdbcType=VARCHAR}, #{rentingdetailsHousingld,jdbcType=VARCHAR},
       #{propertiesdetailsListHouseid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.hangchuang.dealhouse.pojo.RentingDetails">

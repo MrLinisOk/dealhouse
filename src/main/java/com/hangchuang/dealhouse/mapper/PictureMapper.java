@@ -3,15 +3,11 @@ package com.hangchuang.dealhouse.mapper;
 import com.hangchuang.dealhouse.pojo.Picture;
 
 public interface PictureMapper {
-    int deleteByPrimaryKey(Integer id);
+    Picture selectPicture_id(Integer id);
 
-    int insert(Picture record);
+    int deletePicture_id(Integer id);
 
-    int insertSelective(Picture record);
+    int insertPicture(Picture picture);
 
-    Picture selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Picture record);
-
-    int updateByPrimaryKey(Picture record);
+    int updatePicture_id(Picture picture);
 }

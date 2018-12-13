@@ -13,7 +13,7 @@ public class RentingDetails {
 
     private Double rentingdetailsRent;
 
-    private String rentingdetailsApartment;
+    private Integer rentingdetailsApartment;
 
     private Integer rentingdetailsArea;
 
@@ -83,12 +83,12 @@ public class RentingDetails {
         this.rentingdetailsRent = rentingdetailsRent;
     }
 
-    public String getRentingdetailsApartment() {
+    public Integer getRentingdetailsApartment() {
         return rentingdetailsApartment;
     }
 
-    public void setRentingdetailsApartment(String rentingdetailsApartment) {
-        this.rentingdetailsApartment = rentingdetailsApartment == null ? null : rentingdetailsApartment.trim();
+    public void setRentingdetailsApartment(Integer rentingdetailsApartment) {
+        this.rentingdetailsApartment = rentingdetailsApartment;
     }
 
     public Integer getRentingdetailsArea() {

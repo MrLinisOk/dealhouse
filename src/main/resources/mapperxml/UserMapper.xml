@@ -11,12 +11,10 @@
     <result column="housetype" jdbcType="VARCHAR" property="housetype" />
     <result column="budge" jdbcType="VARCHAR" property="budge" />
   </resultMap>
-  <sql id="Base_Column_List">
-    id, name, photo, phone, email, purpose, housetype, budge
-  </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />
+   *
     from user
     where id = #{id,jdbcType=INTEGER}
   </select>

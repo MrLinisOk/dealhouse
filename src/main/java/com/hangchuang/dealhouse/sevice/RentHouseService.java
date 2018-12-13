@@ -15,7 +15,7 @@ public interface RentHouseService {
                                            int smallPrice, //价格从低到高
                                            int houseingTypeId,//房屋类型（住宅，公寓， 别墅， 商铺）
                                            int featureId,//房屋优势
-                                           int countryId,//房屋区域（金水， 惠济， 东区）
+                                           int countryId,//房屋区域（金水， 惠济， 东区）`
                                            double priceRangeSmall,//价格区间（小）
                                            double priceRangeBig,//价格区间（大）
                                            int areaRangeSmall, //面积区间（小）
